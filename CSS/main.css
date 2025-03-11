@@ -1,28 +1,48 @@
-body{
+html, body {
+    height: 100%;
+    margin: 0;
     display: flex;
+    flex-direction: column; /* Stapel de elementen onder elkaar */
 }
-/* achtergrond kleuren weghalen en widths goed zetten | van 50% -> wens */
-.container-left{
+
+.container-main {
+    display: flex;
+    flex: 1; /* Zorgt ervoor dat deze container de volledige resterende ruimte inneemt */
+}
+
+.container-left {
     background-color: red;
     height: 800px;
     width: 20%;
 }
-.container-right{
+
+.container-right {
     background-color: blue;
     height: 800px;
     width: 80%;
 }
-.container-ui, .container-information, .container-graphs{
+
+.container-ui, .container-information, .container-graphs {
     border: 3px solid green;
     box-sizing: border-box;
 }
-/* hoogtes goed zetten van alles 20% -> naar wens */
-.container-ui{
+
+.container-ui {
     height: 50%;
 }
-.container-information{
+
+.container-information {
     height: 50%;
 }
-.container-graphs{
+
+.container-graphs {
     height: 100%;
+}
+
+/* Footer altijd onderaan houden */
+.container-footer {
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    background-color: #f1f1f1;
 }

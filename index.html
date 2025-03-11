@@ -12,29 +12,34 @@
 </head>
 
 <body>
-    <!-- CONTAINER LEFT -->
-    <div class="container-left">
-        <!-- CONTAINER INFORMATION -->
-        <div class="container-information">
-            <h1 id="chartTitle">My graph</h1>
-            <p>This is a description of the graph</p>
+    <!-- Container met UI en charts-->
+    <div class="container-main">
+        <!-- CONTAINER LEFT -->
+        <div class="container-left">
+            <div class="container-information">
+                <h1 id="chartTitle">My graph</h1>
+                <p>This is a description of the graph</p>
+            </div>
+            <div class="container-ui">
+                <button id="darkModeButton">🌙 Dark Mode</button>
+                <button id="ChartButton1">Treinstoringen per maand</button>
+                <button id="ChartButton2">Oorzaak treinstoringen</button>
+                <button>Graph 3</button>
+            </div>
         </div>
-        <!-- CONTAINER UI -->
-        <div class="container-ui">
-            <button id="darkModeButton">🌙 Dark Mode</button>
-            <button id="ChartButton1">Treinstoringen per maand</button>
-            <button id="ChartButton2">Oorzaak treinstoringen</button>
-            <button>Graph 3</button>
+        <!-- CONTAINER RIGHT-->
+        <div class="container-right">
+            <div class="container-graphs">
+                <canvas id="myChart"></canvas>
+            </div>
         </div>
     </div>
-    <!-- CONTAINER RIGHT-->
-    <div class="container-right">
-        <!-- CONTAINER GRAPHS -->
-        <div class="container-graphs">
-            <!-- Canvas to draw the chart-->
-            <canvas id="myChart"></canvas>
-        </div>
-    </div>
+
+    <!-- FOOTER -->
+    <footer class="container-footer">
+        <p>Bron: <a href="https://www.rijdendetreinen.nl/open-data/treinstoringen" target="_blank">
+            Rijden de Treinen</a> - Creative Commons Attribution 4.0-licentie</p>
+    </footer>
 </body>
 <!-- link to the custom JS -->
 <script src="script.js"></script>
