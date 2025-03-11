@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- link CSS -->
+    <link rel="stylesheet" href="CSS/main.css">
+    <!-- link to the Chart.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <!-- CONTAINER LEFT -->
+    <div class="container-left">
+        <!-- CONTAINER INFORMATION -->
+        <div class="container-information">
+            <h1 id="chartTitle">My graph</h1>
+            <p>This is a description of the graph</p>
+        </div>
+        <!-- CONTAINER UI -->
+        <div class="container-ui">
+            <button id="darkModeButton">🌙 Dark Mode</button>
+            <button id="ChartButton1">Treinstoringen per maand</button>
+            <button id="ChartButton2">Oorzaak treinstoringen</button>
+            <button>Graph 3</button>
+        </div>
+    </div>
+    <!-- CONTAINER RIGHT-->
+    <div class="container-right">
+        <!-- CONTAINER GRAPHS -->
+        <div class="container-graphs">
+            <!-- Canvas to draw the chart-->
+            <canvas id="myChart"></canvas>
+        </div>
+    </div>
+</body>
+<!-- link to the custom JS -->
+<script src="script.js"></script>
+
+</html>

@@ -1,0 +1,28 @@
+body{
+    display: flex;
+}
+/* achtergrond kleuren weghalen en widths goed zetten | van 50% -> wens */
+.container-left{
+    background-color: red;
+    height: 800px;
+    width: 20%;
+}
+.container-right{
+    background-color: blue;
+    height: 800px;
+    width: 80%;
+}
+.container-ui, .container-information, .container-graphs{
+    border: 3px solid green;
+    box-sizing: border-box;
+}
+/* hoogtes goed zetten van alles 20% -> naar wens */
+.container-ui{
+    height: 50%;
+}
+.container-information{
+    height: 50%;
+}
+.container-graphs{
+    height: 100%;
+}
