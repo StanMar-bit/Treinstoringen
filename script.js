@@ -45,12 +45,14 @@ document.addEventListener("DOMContentLoaded", function() {
                 y: {
                     beginAtZero: true,
                     ticks: {
-                        autoSkip: true
+                        autoSkip: true,
+                        maxTicksLimit: 8
                     }
                 },
                 x: {
                     ticks: {
                         autoSkip: true,
+                        maxTicksLimit: 6,
                         maxRotation: 45,
                         minRotation: 45
                     }
@@ -58,12 +60,16 @@ document.addEventListener("DOMContentLoaded", function() {
             },
             plugins: {
                 legend: {
-                    display: true
+                    display: true,
+                    position: 'top'
                 }
             },
             layout: {
                 padding: {
-                    bottom: 10
+                    left: 10,
+                    right: 10,
+                    top: 20,
+                    bottom: 20
                 }
             }
         }
