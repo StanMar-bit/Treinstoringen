@@ -39,14 +39,31 @@ document.addEventListener("DOMContentLoaded", function() {
             }]
         },
         options: {
+            responsive: true,
+            maintainAspectRatio: false,
             scales: {
                 y: {
-                    beginAtZero: true
+                    beginAtZero: true,
+                    ticks: {
+                        autoSkip: true
+                    }
+                },
+                x: {
+                    ticks: {
+                        autoSkip: true,
+                        maxRotation: 45,
+                        minRotation: 45
+                    }
                 }
             },
             plugins: {
                 legend: {
                     display: true
+                }
+            },
+            layout: {
+                padding: {
+                    bottom: 10
                 }
             }
         }
