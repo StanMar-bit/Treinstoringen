@@ -183,7 +183,7 @@ button {
 }
 
 button:hover {
-    background-color: var(--blauw);
+    background-color: #4D79B3; /* Lichtere tint van blauw */
     color: var(--wit);
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -282,4 +282,17 @@ button.active {
         padding: 0 10px;
         box-sizing: border-box;
     }
+}
+
+.chart-description {
+    color: #39394D;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Adjust description text color in dark mode */
+.dark-mode .chart-description {
+    color: #ccc;
 }

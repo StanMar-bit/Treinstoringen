@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", function() {
     var ChartButton2 = document.getElementById('ChartButton2'); // Oorzaak treinstoringen
     var darkModeButton = document.getElementById('darkModeButton');
     var chartTitle = document.getElementById("chartTitle");
+    var chartDescription = document.getElementById("chartDescription");
     var collapseButton = document.getElementById('collapseButton');
     var containerLeft = document.querySelector('.container-left');
 
@@ -46,13 +47,12 @@ document.addEventListener("DOMContentLoaded", function() {
                     beginAtZero: true,
                     ticks: {
                         autoSkip: true,
-                        maxTicksLimit: 8
+                        maxTicksLimit: 10
                     }
                 },
                 x: {
                     ticks: {
-                        autoSkip: true,
-                        maxTicksLimit: 6,
+                        autoSkip: false,   //laat alle maanden zien
                         maxRotation: 45,
                         minRotation: 45
                     }
@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     left: 10,
                     right: 10,
                     top: 20,
-                    bottom: 20
+                    bottom: 30
                 }
             }
         }
@@ -91,26 +91,55 @@ document.addEventListener("DOMContentLoaded", function() {
             const response = await fetch('/Data/disruptions-2024.json');
             const data = await response.json();
 
+            // Maanden in Nederlands
+            const monthNames = {
+                '01': 'Januari',
+                '02': 'Februari',
+                '03': 'Maart',
+                '04': 'April',
+                '05': 'Mei',
+                '06': 'Juni',
+                '07': 'Juli',
+                '08': 'Augustus',
+                '09': 'September',
+                '10': 'Oktober',
+                '11': 'November',
+                '12': 'December'
+            };
+
             // Storing per maand tellen
             const monthlyCounts = {};
             data.forEach(item => {
                 const date = new Date(item.start_time);
-                const month = date.getFullYear() + '-' + String(date.getMonth() + 1).padStart(2, '0');
-                monthlyCounts[month] = (monthlyCounts[month] || 0) + 1;
+                const monthNum = String(date.getMonth() + 1).padStart(2, '0');
+                const monthName = monthNames[monthNum];
+                monthlyCounts[monthName] = (monthlyCounts[monthName] || 0) + 1;
             });
 
             // Labels en dataset genereren
-            const labels = Object.keys(monthlyCounts).sort();
+            const labels = Object.keys(monthlyCounts);
             const values = labels.map(month => monthlyCounts[month]);
+
+            // Set chart type to bar
+            myChart.config.type = 'bar';
 
             // Grafiek bijwerken
             myChart.data.labels = labels;
             myChart.data.datasets[0].data = values;
             myChart.data.datasets[0].label = 'Aantal storingen per maand';
+            myChart.data.datasets[0].backgroundColor = blauwColor;
+            myChart.data.datasets[0].borderColor = blauwColor;
+
+            // Update chart options for bar chart
+            myChart.options.scales.y.display = true;
+            myChart.options.scales.x.display = true;
+            
             myChart.update();
 
-            // Titel updaten
+            // Titel en beschrijving updaten
             chartTitle.textContent = "Aantal storingen per maand in 2024";
+            chartDescription.textContent = "Deze grafiek toont het aantal treinstoringen per maand in 2024. De blauwe balken geven het totale aantal storingen weer voor elke maand.";
+
         } catch (error) {
             console.error("Fout bij laden van data:", error);
         }
@@ -122,25 +151,61 @@ document.addEventListener("DOMContentLoaded", function() {
             const response = await fetch('/Data/disruptions-2024.json');
             const data = await response.json();
 
+            // Vertalingen voor oorzaakgroepen
+            const causeTranslations = {
+                'staff': 'Personeel',
+                'external': 'Externe factoren',
+                'infrastructure': 'Infrastructuur',
+                'rolling stock': 'Materieel',
+                'weather': 'Weer',
+                'accidents': 'Ongelukken',
+                'logistical': 'Logistiek',
+                'engineering work': 'Technisch werk',
+                'unknown': 'Onbekend'
+            };
+
             // Groeperen en tellen per oorzaakstype (`cause_group`)
             const causeCounts = {};
             data.forEach(item => {
-                const cause = item.cause_group || "onbekend"; // Fallback voor ontbrekende data
-                causeCounts[cause] = (causeCounts[cause] || 0) + 1;
+                const cause = item.cause_group || "unknown"; // Fallback voor ontbrekende data
+                const translatedCause = causeTranslations[cause] || cause; // Gebruik vertaling of origineel als geen vertaling bestaat
+                causeCounts[translatedCause] = (causeCounts[translatedCause] || 0) + 1;
             });
 
             // Labels en dataset genereren
             const labels = Object.keys(causeCounts);
             const values = labels.map(cause => causeCounts[cause]);
 
+            // Set chart type to pie
+            myChart.config.type = 'pie';
+            
             // Grafiek bijwerken
             myChart.data.labels = labels;
             myChart.data.datasets[0].data = values;
             myChart.data.datasets[0].label = 'Aantal storingen per oorzaak';
+            
+            // Colors for pie chart
+            myChart.data.datasets[0].backgroundColor = [
+                '#003082',  // Main blue
+                '#FFC917',  // Main yellow
+                '#E6E6E9',  // Main grey
+                '#4D79B3',  // Lighter blue
+                '#FFE066',  // Lighter yellow
+                '#999999',  // Darker grey
+                '#001F52',  // Darker blue
+                '#CC9900',  // Darker yellow
+            ];
+
+            // Hide scales for pie chart
+            myChart.options.scales.y.display = false;
+            myChart.options.scales.x.display = false;
+
             myChart.update();
 
-            // Titel updaten
+            // Titel en beschrijving updaten
             chartTitle.textContent = "Oorzaken van treinstoringen in 2024";
+            chartDescription.textContent = "Deze cirkeldiagram laat zien hoe de verschillende oorzaken van treinstoringen zijn verdeeld. Elke kleur vertegenwoordigt een andere categorie van storingen.";
+
         } catch (error) {
             console.error("Fout bij laden van data:", error);
         }
