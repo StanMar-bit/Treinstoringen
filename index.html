@@ -4,28 +4,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Treinstoringen Dashboard</title>
     <!-- link CSS -->
     <link rel="stylesheet" href="CSS/main.css">
+    <!-- Font Awesome for GitHub icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <!-- link to the Chart.js library -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
+    <header class="header">
+        <a href="/">treinstoringen.com</a>
+        <div class="header-buttons">
+            <button id="darkModeButton" class="dark-mode-button">🌙 Dark Mode</button>
+            <a href="https://github.com/StanMar-bit/Treinstoringen" target="_blank" class="github-button">
+                <i class="fab fa-github"></i>
+            </a>
+        </div>
+    </header>
     <!-- Container met UI en charts-->
     <div class="container-main">
         <!-- CONTAINER LEFT -->
         <div class="container-left">
-            <div class="container-information">
-                <h1 id="chartTitle">My graph</h1>
-                <p>This is a description of the graph</p>
+            <div class="container-content">
+                <div class="container-information">
+                    <h1 id="chartTitle">My graph</h1>
+                    <p>This is a description of the graph</p>
+                </div>
+                <div class="container-ui">
+                    <button id="ChartButton1">Treinstoringen per maand</button>
+                    <button id="ChartButton2">Oorzaak treinstoringen</button>
+                    <button>Graph 3</button>
+                </div>
             </div>
-            <div class="container-ui">
-                <button id="darkModeButton">🌙 Dark Mode</button>
-                <button id="ChartButton1">Treinstoringen per maand</button>
-                <button id="ChartButton2">Oorzaak treinstoringen</button>
-                <button>Graph 3</button>
-            </div>
+            <button id="collapseButton" class="collapse-button">
+                <span class="collapse-icon">◀</span>
+                <span class="expand-icon">▶</span>
+            </button>
         </div>
         <!-- CONTAINER RIGHT-->
         <div class="container-right">

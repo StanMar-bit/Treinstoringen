@@ -9,6 +9,21 @@ document.addEventListener("DOMContentLoaded", function() {
     var ChartButton2 = document.getElementById('ChartButton2'); // Oorzaak treinstoringen
     var darkModeButton = document.getElementById('darkModeButton');
     var chartTitle = document.getElementById("chartTitle");
+    var collapseButton = document.getElementById('collapseButton');
+    var containerLeft = document.querySelector('.container-left');
+
+    // Collapse functionality
+    collapseButton.addEventListener('click', function() {
+        containerLeft.classList.toggle('collapsed');
+        // Update chart size after collapse
+        setTimeout(() => {
+            myChart.resize();
+        }, 300); // Wait for transition to complete
+    });
+
+    // Get CSS variables
+    const style = getComputedStyle(document.documentElement);
+    const blauwColor = style.getPropertyValue('--blauw');
 
     // Standaard lege chart
     var myChart = new Chart(ChartCanvas, {
@@ -19,8 +34,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 label: 'Aantal storingen',
                 data: [],
                 borderWidth: 1,
-                backgroundColor: 'rgba(75, 192, 192, 0.6)', 
-                borderColor: 'rgba(75, 192, 192, 1)'
+                backgroundColor: blauwColor,
+                borderColor: blauwColor
             }]
         },
         options: {
@@ -36,6 +51,16 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         }
     });
+
+    // Functie om actieve button state te updaten
+    function updateActiveButton(activeButton) {
+        // Remove active class from all buttons
+        [ChartButton1, ChartButton2].forEach(button => {
+            button.classList.remove('active');
+        });
+        // Add active class to clicked button
+        activeButton.classList.add('active');
+    }
 
     // Functie om treinstoringen per maand te laden
     async function loadMonthlyDisruptions() {
@@ -98,9 +123,16 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
-    // Knoppen koppelen aan functies
-    ChartButton1.addEventListener('click', loadMonthlyDisruptions);
-    ChartButton2.addEventListener('click', loadDisruptionCauses);
+    // Knoppen koppelen aan functies met active state
+    ChartButton1.addEventListener('click', function() {
+        updateActiveButton(ChartButton1);
+        loadMonthlyDisruptions();
+    });
+    
+    ChartButton2.addEventListener('click', function() {
+        updateActiveButton(ChartButton2);
+        loadDisruptionCauses();
+    });
 
     // Functie om donkere modus te wisselen
     function toggleDarkMode() {
@@ -117,4 +149,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Knop koppelen aan donkere modus
     darkModeButton.addEventListener('click', toggleDarkMode);
+
+    // Load initial graph and set active state
+    loadMonthlyDisruptions();
+    updateActiveButton(ChartButton1);
 });
