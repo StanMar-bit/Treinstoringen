@@ -296,3 +296,84 @@ button.active {
 .dark-mode .chart-description {
     color: #ccc;
 }
+
+/* Dark mode styles */
+.dark-mode {
+    background-color: #1a1a1a;
+    color: #ffffff;
+}
+
+.dark-mode .header {
+    background-color: #2d2d2d;
+    border-bottom: 1px solid #404040;
+}
+
+.dark-mode .header a {
+    color: #ffffff;
+}
+
+.dark-mode .container-left {
+    background-color: #2d2d2d;
+}
+
+.dark-mode .container-right {
+    background-color: #1a1a1a;
+}
+
+.dark-mode .container-footer {
+    background-color: #2d2d2d;
+    color: #ffffff;
+}
+
+.dark-mode .container-footer a {
+    color: var(--geel);
+}
+
+.dark-mode button {
+    background-color: #2d2d2d;
+    color: var(--wit);
+    border-color: var(--blauw);
+}
+
+.dark-mode button:hover {
+    background-color: #4D79B3;
+    color: var(--wit);
+}
+
+.dark-mode button.active {
+    background-color: var(--blauw);
+    color: var(--wit);
+}
+
+.dark-mode .github-button {
+    color: var(--blauw);
+}
+
+.dark-mode #chartTitle {
+    color: #ffffff;
+}
+
+.dark-mode .chart-description {
+    color: #cccccc;
+}
+
+#mapContainer {
+    height: 100%;
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.leaflet-container {
+    font-family: Arial, sans-serif;
+}
+
+/* Dark mode map popup styles */
+.dark-mode .leaflet-popup-content-wrapper {
+    background-color: #2d2d2d;
+    color: #ffffff;
+}
+
+.dark-mode .leaflet-popup-tip {
+    background-color: #2d2d2d;
+}

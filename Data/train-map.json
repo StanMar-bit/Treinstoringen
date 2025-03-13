@@ -1,0 +1,1272 @@
+[
+    {
+        "name": "Alkmaar",
+        "coords": [[52.6324, 4.7534]],
+        "disruptions": 2
+    },
+    {
+        "name": "Alkmaar - Den Helder",
+        "coords": [[52.6324, 4.7534], [52.9551, 4.7608]],
+        "disruptions": 32
+    },
+    {
+        "name": "Alkmaar - Hoorn",
+        "coords": [[52.6324, 4.7534], [52.6426, 5.0601]],
+        "disruptions": 31
+    },
+    {
+        "name": "Alkmaar Noord",
+        "coords": [[52.6438, 4.7598]],
+        "disruptions": 1
+    },
+    {
+        "name": "Almelo",
+        "coords": [[52.3568, 6.6625]],
+        "disruptions": 1
+    },
+    {
+        "name": "Almelo - Hardenberg",
+        "coords": [[52.3568, 6.6625], [52.5759, 6.6154]],
+        "disruptions": 28
+    },
+    {
+        "name": "Almelo - Hengelo",
+        "coords": [[52.3568, 6.6625], [52.2658, 6.7932]],
+        "disruptions": 8
+    },
+    {
+        "name": "Almere - Lelystad",
+        "coords": [[52.3703, 5.2194], [52.5063, 5.4751]],
+        "disruptions": 23
+    },
+    {
+        "name": "Almere - Zwolle",
+        "coords": [[52.3703, 5.2194], [52.5168, 6.0830]],
+        "disruptions": 9
+    },
+    {
+        "name": "Alphen a/d Rijn - Gouda",
+        "coords": [[52.1277, 4.6689], [52.0168, 4.7087]],
+        "disruptions": 41
+    },
+    {
+        "name": "Amersfoort - Amersfoort Vathorst",
+        "coords": [[52.1561, 5.3878], [52.1926, 5.4178]],
+        "disruptions": 21
+    },
+    {
+        "name": "Amersfoort - Barneveld",
+        "coords": [[52.1561, 5.3878], [52.1400, 5.5847]],
+        "disruptions": 24
+    },
+    {
+        "name": "Amersfoort - Deventer",
+        "coords": [[52.1561, 5.3878], [52.2510, 6.1637]],
+        "disruptions": 68
+    },
+    {
+        "name": "Amersfoort - Ede-Wageningen",
+        "coords": [[52.1561, 5.3878], [52.0333, 5.6722]],
+        "disruptions": 50
+    },
+    {
+        "name": "Amersfoort - Harderwijk",
+        "coords": [[52.1561, 5.3878], [52.3486, 5.6208]],
+        "disruptions": 5
+    },
+    {
+        "name": "Amersfoort - Zwolle",
+        "coords": [[52.1561, 5.3878], [52.5168, 6.0830]],
+        "disruptions": 77
+    },
+    {
+        "name": "Amersfoort Centraal",
+        "coords": [[52.1538, 5.3758]],
+        "disruptions": 7
+    },
+    {
+        "name": "Amsterdam - Alkmaar",
+        "coords": [[52.3676, 4.9041], [52.6324, 4.7534]],
+        "disruptions": 3
+    },
+    {
+        "name": "Amsterdam - Almere",
+        "coords": [[52.3676, 4.9041], [52.3703, 5.2194]],
+        "disruptions": 51
+    },
+    {
+        "name": "Amsterdam - Amersfoort",
+        "coords": [[52.3676, 4.9041], [52.1561, 5.3878]],
+        "disruptions": 10
+    },
+    {
+        "name": "Amsterdam - Amsterdam Sloterdijk",
+        "coords": [[52.3676, 4.9041], [52.3888, 4.8372]],
+        "disruptions": 3
+    },
+    {
+        "name": "Amsterdam - Enkhuizen",
+        "coords": [[52.3676, 4.9041], [52.7005, 5.2913]],
+        "disruptions": 33
+    },
+    {
+        "name": "Amsterdam - Gouda",
+        "coords": [[52.3676, 4.9041], [52.0168, 4.7087]],
+        "disruptions": 17
+    },
+    {
+        "name": "Amsterdam - Haarlem",
+        "coords": [[52.3676, 4.9041], [52.3874, 4.6366]],
+        "disruptions": 77
+    },
+    {
+        "name": "Amsterdam - Haarlem - Den Haag",
+        "coords": [[52.3676, 4.9041], [52.3874, 4.6366], [52.0705, 4.3007]],
+        "disruptions": 4
+    },
+    {
+        "name": "Amsterdam - Haarlem - Leiden",
+        "coords": [[52.3676, 4.9041], [52.3874, 4.6366], [52.1497, 4.4931]],
+        "disruptions": 14
+    },
+    {
+        "name": "Amsterdam - Hilversum",
+        "coords": [[52.3676, 4.9041], [52.2237, 5.1760]],
+        "disruptions": 19
+    },
+    {
+        "name": "Amsterdam - Hoofddorp",
+        "coords": [[52.3676, 4.9041], [52.3022, 4.6907]],
+        "disruptions": 21
+    },
+    {
+        "name": "Amsterdam - Köln - Frankfurt",
+        "coords": [[52.3676, 4.9041], [50.9375, 6.9603], [50.1109, 8.6821]],
+        "disruptions": 4
+    },
+    {
+        "name": "Amsterdam - Lelystad Centrum",
+        "coords": [[52.3676, 4.9041], [52.5063, 5.4751]],
+        "disruptions": 20
+    },
+    {
+        "name": "Amsterdam - Rotterdam - Breda",
+        "coords": [[52.3676, 4.9041], [51.9244, 4.4777], [51.5954, 4.7762]],
+        "disruptions": 10
+    },
+    {
+        "name": "Amsterdam - Rotterdam - Brussel",
+        "coords": [[52.3676, 4.9041], [51.9244, 4.4777], [50.8503, 4.3517]],
+        "disruptions": 8
+    },
+    {
+        "name": "Amsterdam - Schagen",
+        "coords": [[52.3676, 4.9041], [52.7875, 4.7986]],
+        "disruptions": 4
+    },
+    {
+        "name": "Amsterdam - Schiphol",
+        "coords": [[52.3676, 4.9041], [52.3091, 4.7619]],
+        "disruptions": 32
+    },
+    {
+        "name": "Amsterdam - Schiphol - Hoofddorp",
+        "coords": [[52.3676, 4.9041], [52.3091, 4.7619], [52.3022, 4.6907]],
+        "disruptions": 2
+    },
+    {
+        "name": "Amsterdam - Schiphol - Leiden",
+        "coords": [[52.3676, 4.9041], [52.3091, 4.7619], [52.1497, 4.4931]],
+        "disruptions": 38
+    },
+    {
+        "name": "Amsterdam - Schiphol - Rotterdam",
+        "coords": [[52.3676, 4.9041], [52.3091, 4.7619], [51.9244, 4.4777]],
+        "disruptions": 110
+    },
+    {
+        "name": "Amsterdam - Uitgeest",
+        "coords": [[52.3676, 4.9041], [52.5205, 4.7022]],
+        "disruptions": 24
+    },
+    {
+        "name": "Amsterdam - Utrecht",
+        "coords": [[52.3676, 4.9041], [52.0907, 5.1098]],
+        "disruptions": 142
+    },
+    {
+        "name": "Amsterdam - Utrecht - Eindhoven Centraal",
+        "coords": [[52.3676, 4.9041], [52.0907, 5.1098], [51.4416, 5.4697]],
+        "disruptions": 9
+    },
+    {
+        "name": "Amsterdam - Weesp",
+        "coords": [[52.3676, 4.9041], [52.3114, 5.0418]],
+        "disruptions": 17
+    },
+    {
+        "name": "Amsterdam - Zaandam - Alkmaar",
+        "coords": [[52.3676, 4.9041], [52.4381, 4.8293], [52.6324, 4.7534]],
+        "disruptions": 55
+    },
+    {
+        "name": "Amsterdam - Zandvoort aan Zee",
+        "coords": [[52.3676, 4.9041], [52.3711, 4.5301]],
+        "disruptions": 7
+    },
+    {
+        "name": "Amsterdam Bijlmer ArenA - Leiden Centraal",
+        "coords": [[52.3129, 4.9462], [52.1497, 4.4931]],
+        "disruptions": 9
+    },
+    {
+        "name": "Amsterdam Bijlmer ArenA - Schiphol - Leiden Centraal",
+        "coords": [[52.3129, 4.9462], [52.3091, 4.7619], [52.1497, 4.4931]],
+        "disruptions": 2
+    },
+    {
+        "name": "Amsterdam Centraal",
+        "coords": [[52.3791, 4.9004]],
+        "disruptions": 8
+    },
+    {
+        "name": "Amsterdam Holendrecht",
+        "coords": [[52.2984, 4.9597]],
+        "disruptions": 1
+    },
+    {
+        "name": "Amsterdam Sloterdijk",
+        "coords": [[52.3888, 4.8372]],
+        "disruptions": 1
+    },
+    {
+        "name": "Amsterdam Sloterdijk - Hoorn Kersenboogerd",
+        "coords": [[52.3888, 4.8372], [52.6526, 5.0846]],
+        "disruptions": 42
+    },
+    {
+        "name": "Amsterdam Sloterdijk - Schiphol Airport",
+        "coords": [[52.3888, 4.8372], [52.3091, 4.7619]],
+        "disruptions": 23
+    },
+    {
+        "name": "Amsterdam Zuid",
+        "coords": [[52.3417, 4.8732]],
+        "disruptions": 1
+    },
+    {
+        "name": "Amsterdam Zuid - Den Haag",
+        "coords": [[52.3417, 4.8732], [52.0705, 4.3007]],
+        "disruptions": 5
+    },
+    {
+        "name": "Amsterdam Zuid - Leiden Centraal",
+        "coords": [[52.3417, 4.8732], [52.1497, 4.4931]],
+        "disruptions": 13
+    },
+    {
+        "name": "Amsterdam Zuid - Schiphol - Leiden Centraal",
+        "coords": [[52.3417, 4.8732], [52.3091, 4.7619], [52.1497, 4.4931]],
+        "disruptions": 1
+    },
+    {
+        "name": "Amsterdam - Brussel - Paris (HSL)",
+        "coords": [[52.3676, 4.9041], [50.8503, 4.3517], [48.8566, 2.3522]],
+        "disruptions": 2
+    },
+    {
+        "name": "Amsterdam - Hannover - Berlin",
+        "coords": [[52.3676, 4.9041], [52.3759, 9.7320], [52.5200, 13.4050]],
+        "disruptions": 3
+    },
+    {
+        "name": "Apeldoorn - Deventer",
+        "coords": [[52.2112, 5.9712], [52.2510, 6.1637]],
+        "disruptions": 12
+    },
+    {
+        "name": "Apeldoorn - Enschede",
+        "coords": [[52.2112, 5.9712], [52.2215, 6.8937]],
+        "disruptions": 4
+    },
+    {
+        "name": "Apeldoorn - Zutphen",
+        "coords": [[52.2112, 5.9712], [52.1388, 6.1958]],
+        "disruptions": 17
+    },
+    {
+        "name": "Arnhem - Doetinchem",
+        "coords": [[51.9851, 5.8987], [51.9650, 6.2888]],
+        "disruptions": 33
+    },
+    {
+        "name": "Arnhem - Duisburg - Düsseldorf",
+        "coords": [[51.9851, 5.8987], [51.4294, 6.7750], [51.2211, 6.7928]],
+        "disruptions": 96
+    },
+    {
+        "name": "Arnhem - Nijmegen",
+        "coords": [[51.9851, 5.8987], [51.8426, 5.8546]],
+        "disruptions": 70
+    },
+    {
+        "name": "Arnhem - Tiel",
+        "coords": [[51.9851, 5.8987], [51.8879, 5.4279]],
+        "disruptions": 27
+    },
+    {
+        "name": "Arnhem - Winterswijk",
+        "coords": [[51.9851, 5.8987], [51.9705, 6.7195]],
+        "disruptions": 43
+    },
+    {
+        "name": "Arnhem - Zutphen",
+        "coords": [[51.9851, 5.8987], [52.1388, 6.1958]],
+        "disruptions": 74
+    },
+    {
+        "name": "Arnhem Centraal",
+        "coords": [[51.9851, 5.8987]],
+        "disruptions": 2
+    },
+    {
+        "name": "Breda",
+        "coords": [[51.5954, 4.7762]],
+        "disruptions": 3
+    },
+    {
+        "name": "Breda - Antwerpen - Brussel",
+        "coords": [[51.5954, 4.7762], [51.2172, 4.4213], [50.8503, 4.3517]],
+        "disruptions": 24
+    },
+    {
+        "name": "Breda - Eindhoven",
+        "coords": [[51.5954, 4.7762], [51.4416, 5.4697]],
+        "disruptions": 47
+    },
+    {
+        "name": "Breda - Roosendaal",
+        "coords": [[51.5954, 4.7762], [51.5315, 4.4586]],
+        "disruptions": 37
+    },
+    {
+        "name": "Breda - 's-Hertogenbosch",
+        "coords": [[51.5954, 4.7762], [51.6905, 5.2935]],
+        "disruptions": 25
+    },
+    {
+        "name": "Breda - Tilburg",
+        "coords": [[51.5954, 4.7762], [51.5605, 5.0836]],
+        "disruptions": 42
+    },
+    {
+        "name": "Breukelen - Gouda",
+        "coords": [[52.1712, 4.9897], [52.0168, 4.7087]],
+        "disruptions": 14
+    },
+    {
+        "name": "Breukelen - Utrecht - Veenendaal",
+        "coords": [[52.1712, 4.9897], [52.0907, 5.1098], [52.0286, 5.5549]],
+        "disruptions": 21
+    },
+    {
+        "name": "Breukelen - Rotterdam",
+        "coords": [[52.1712, 4.9897], [51.9244, 4.4777]],
+        "disruptions": 1
+    },
+    {
+        "name": "Delft",
+        "coords": [[52.0116, 4.3571]],
+        "disruptions": 2
+    },
+    {
+        "name": "Den Haag - Rotterdam",
+        "coords": [[52.0705, 4.3007], [51.9244, 4.4777]],
+        "disruptions": 120
+    },
+    {
+        "name": "Den Haag - Rotterdam - Dordrecht",
+        "coords": [[52.0705, 4.3007], [51.9244, 4.4777], [51.8100, 4.6738]],
+        "disruptions": 31
+    },
+    {
+        "name": "Den Haag Centraal",
+        "coords": [[52.0802, 4.3250]],
+        "disruptions": 4
+    },
+    {
+        "name": "Den Haag HS",
+        "coords": [[52.0698, 4.3195]],
+        "disruptions": 2
+    },
+    {
+        "name": "Den Haag Mariahoeve",
+        "coords": [[52.0896, 4.3752]],
+        "disruptions": 1
+    },
+    {
+        "name": "Den Haag - Gouda Goverwelle",
+        "coords": [[52.0705, 4.3007], [52.0329, 4.7399]],
+        "disruptions": 2
+    },
+    {
+        "name": "Den Haag - Rotterdam - Breda (HSL)",
+        "coords": [[52.0705, 4.3007], [51.9244, 4.4777], [51.5954, 4.7762]],
+        "disruptions": 8
+    },
+    {
+        "name": "Deventer",
+        "coords": [[52.2510, 6.1637]],
+        "disruptions": 3
+    },
+    {
+        "name": "Deventer - Almelo",
+        "coords": [[52.2510, 6.1637], [52.3568, 6.6625]],
+        "disruptions": 49
+    },
+    {
+        "name": "Deventer - Enschede",
+        "coords": [[52.2510, 6.1637], [52.2215, 6.8937]],
+        "disruptions": 28
+    },
+    {
+        "name": "Deventer - Zutphen",
+        "coords": [[52.2510, 6.1637], [52.1388, 6.1958]],
+        "disruptions": 13
+    },
+    {
+        "name": "Doetinchem",
+        "coords": [[51.9650, 6.2888]],
+        "disruptions": 1
+    },
+    {
+        "name": "Dordrecht",
+        "coords": [[51.8100, 4.6738]],
+        "disruptions": 3
+    },
+    {
+        "name": "Dordrecht - Breda",
+        "coords": [[51.8100, 4.6738], [51.5954, 4.7762]],
+        "disruptions": 78
+    },
+    {
+        "name": "Dordrecht - Geldermalsen",
+        "coords": [[51.8100, 4.6738], [51.8824, 5.2886]],
+        "disruptions": 39
+    },
+    {
+        "name": "Dordrecht - Gorinchem",
+        "coords": [[51.8100, 4.6738], [51.8343, 4.9722]],
+        "disruptions": 24
+    },
+    {
+        "name": "Dordrecht - Roosendaal",
+        "coords": [[51.8100, 4.6738], [51.5315, 4.4586]],
+        "disruptions": 84
+    },
+    {
+        "name": "Driebergen-Zeist",
+        "coords": [[52.0660, 5.2581]],
+        "disruptions": 1
+    },
+    {
+        "name": "Duivendrecht",
+        "coords": [[52.3237, 4.9366]],
+        "disruptions": 1
+    },
+    {
+        "name": "Duivendrecht - Lelystad",
+        "coords": [[52.3237, 4.9366], [52.5063, 5.4751]],
+        "disruptions": 14
+    },
+    {
+        "name": "Ede-Wageningen",
+        "coords": [[52.0333, 5.6722]],
+        "disruptions": 2
+    },
+    {
+        "name": "Ede-Wageningen - Arnhem",
+        "coords": [[52.0333, 5.6722], [51.9851, 5.8987]],
+        "disruptions": 18
+    },
+    {
+        "name": "Eindhoven - Deurne",
+        "coords": [[51.4416, 5.4697], [51.4546, 5.7935]],
+        "disruptions": 34
+    },
+    {
+        "name": "Eindhoven - Maastricht",
+        "coords": [[51.4416, 5.4697], [50.8514, 5.6909]],
+        "disruptions": 25
+    },
+    {
+        "name": "Eindhoven - Roermond",
+        "coords": [[51.4416, 5.4697], [51.1941, 5.9875]],
+        "disruptions": 13
+    },
+    {
+        "name": "Eindhoven - Venlo",
+        "coords": [[51.4416, 5.4697], [51.3649, 6.1724]],
+        "disruptions": 64
+    },
+    {
+        "name": "Eindhoven - Weert",
+        "coords": [[51.4416, 5.4697], [51.2516, 5.7035]],
+        "disruptions": 43
+    },
+    {
+        "name": "Eindhoven Centraal",
+        "coords": [[51.4416, 5.4697]],
+        "disruptions": 9
+    },
+    {
+        "name": "Eindhoven - Heerlen",
+        "coords": [[51.4416, 5.4697], [50.8882, 5.9798]],
+        "disruptions": 5
+    },
+    {
+        "name": "Eindhoven - Sittard",
+        "coords": [[51.4416, 5.4697], [50.9989, 5.8691]],
+        "disruptions": 2
+    },
+    {
+        "name": "Enschede - Gronau - Münster",
+        "coords": [[52.2215, 6.8937], [52.2112, 7.0224], [51.9607, 7.6261]],
+        "disruptions": 3
+    },
+    {
+        "name": "Enschede - Gronau - Dortmund",
+        "coords": [[52.2215, 6.8937], [52.2112, 7.0224], [51.5136, 7.4653]],
+        "disruptions": 1
+    },
+    {
+        "name": "Geldermalsen",
+        "coords": [[51.8824, 5.2886]],
+        "disruptions": 1
+    },
+    {
+        "name": "Gouda",
+        "coords": [[52.0168, 4.7087]],
+        "disruptions": 3
+    },
+    {
+        "name": "Gouda - Den Haag",
+        "coords": [[52.0168, 4.7087], [52.0705, 4.3007]],
+        "disruptions": 18
+    },
+    {
+        "name": "Gouda Utrecht Centraal Ede-Wageningen",
+        "coords": [[52.0168, 4.7087], [52.0907, 5.1098], [52.0333, 5.6722]],
+        "disruptions": 1
+    },
+    {
+        "name": "Gouda - Den Haag HS",
+        "coords": [[52.0168, 4.7087], [52.0698, 4.3195]],
+        "disruptions": 1
+    },
+    {
+        "name": "Groningen",
+        "coords": [[53.2194, 6.5665]],
+        "disruptions": 3
+    },
+    {
+        "name": "Groningen - Bad Nieuweschans",
+        "coords": [[53.2194, 6.5665], [53.1836, 7.2049]],
+        "disruptions": 19
+    },
+    {
+        "name": "Groningen - Delfzijl",
+        "coords": [[53.2194, 6.5665], [53.3317, 6.9178]],
+        "disruptions": 24
+    },
+    {
+        "name": "Groningen - Eemshaven",
+        "coords": [[53.2194, 6.5665], [53.4476, 6.8256]],
+        "disruptions": 17
+    },
+    {
+        "name": "Groningen - Leer",
+        "coords": [[53.2194, 6.5665], [53.2316, 7.4653]],
+        "disruptions": 8
+    },
+    {
+        "name": "Groningen - Leeuwarden",
+        "coords": [[53.2194, 6.5665], [53.2012, 5.7999]],
+        "disruptions": 56
+    },
+    {
+        "name": "Groningen - Veendam",
+        "coords": [[53.2194, 6.5665], [53.1067, 6.8799]],
+        "disruptions": 15
+    },
+    {
+        "name": "Haarlem",
+        "coords": [[52.3874, 4.6366]],
+        "disruptions": 1
+    },
+    {
+        "name": "Haarlem - Alkmaar",
+        "coords": [[52.3874, 4.6366], [52.6324, 4.7534]],
+        "disruptions": 28
+    },
+    {
+        "name": "Haarlem - Leiden",
+        "coords": [[52.3874, 4.6366], [52.1497, 4.4931]],
+        "disruptions": 37
+    },
+    {
+        "name": "Haarlem - Zandvoort",
+        "coords": [[52.3874, 4.6366], [52.3711, 4.5301]],
+        "disruptions": 11
+    },
+    {
+        "name": "Haarlem - Den Haag",
+        "coords": [[52.3874, 4.6366], [52.0705, 4.3007]],
+        "disruptions": 1
+    },
+    {
+        "name": "Heerlen",
+        "coords": [[50.8882, 5.9798]],
+        "disruptions": 2
+    },
+    {
+        "name": "Heerlen - Aachen Hbf",
+        "coords": [[50.8882, 5.9798], [50.7759, 6.0896]],
+        "disruptions": 100
+    },
+    {
+        "name": "Heerlen - Kerkrade",
+        "coords": [[50.8882, 5.9798], [50.8646, 6.0538]],
+        "disruptions": 16
+    },
+    {
+        "name": "Heerlen - Maastricht",
+        "coords": [[50.8882, 5.9798], [50.8514, 5.6909]],
+        "disruptions": 36
+    },
+    {
+        "name": "Heerlen - Maastricht Randwyck",
+        "coords": [[50.8882, 5.9798], [50.8378, 5.7165]],
+        "disruptions": 20
+    },
+    {
+        "name": "Hengelo",
+        "coords": [[52.2658, 6.7932]],
+        "disruptions": 3
+    },
+    {
+        "name": "Hengelo - Bielefeld",
+        "coords": [[52.2658, 6.7932], [52.0297, 8.5325]],
+        "disruptions": 63
+    },
+    {
+        "name": "Hengelo - Enschede",
+        "coords": [[52.2658, 6.7932], [52.2215, 6.8937]],
+        "disruptions": 16
+    },
+    {
+        "name": "Hengelo - Oldenzaal",
+        "coords": [[52.2658, 6.7932], [52.3118, 6.9299]],
+        "disruptions": 14
+    },
+    {
+        "name": "Hilversum",
+        "coords": [[52.2237, 5.1760]],
+        "disruptions": 2
+    },
+    {
+        "name": "Hilversum - Amersfoort",
+        "coords": [[52.2237, 5.1760], [52.1561, 5.3878]],
+        "disruptions": 12
+    },
+    {
+        "name": "Hilversum - Amersfoort Schothorst",
+        "coords": [[52.2237, 5.1760], [52.1748, 5.3996]],
+        "disruptions": 10
+    },
+    {
+        "name": "Hilversum Amersfoort Centraal",
+        "coords": [[52.2237, 5.1760], [52.1538, 5.3758]],
+        "disruptions": 1
+    },
+    {
+        "name": "Hoofddorp",
+        "coords": [[52.3022, 4.6907]],
+        "disruptions": 3
+    },
+    {
+        "name": "Hoofddorp - Schiphol - Almere Oostvaarders",
+        "coords": [[52.3022, 4.6907], [52.3091, 4.7619], [52.4033, 5.3028]],
+        "disruptions": 9
+    },
+    {
+        "name": "Hoofddorp - Schiphol - Hilversum",
+        "coords": [[52.3022, 4.6907], [52.3091, 4.7619], [52.2237, 5.1760]],
+        "disruptions": 13
+    },
+    {
+        "name": "Hoofddorp - Schiphol - Hoorn",
+        "coords": [[52.3022, 4.6907], [52.3091, 4.7619], [52.6426, 5.0601]],
+        "disruptions": 1
+    },
+    {
+        "name": "Hoofddorp - Schiphol - Lelystad",
+        "coords": [[52.3022, 4.6907], [52.3091, 4.7619], [52.5063, 5.4751]],
+        "disruptions": 2
+    },
+    {
+        "name": "Hoorn",
+        "coords": [[52.6426, 5.0601]],
+        "disruptions": 2
+    },
+    {
+        "name": "Leeuwarden",
+        "coords": [[53.2012, 5.7999]],
+        "disruptions": 4
+    },
+    {
+        "name": "Leeuwarden - Harlingen Haven",
+        "coords": [[53.2012, 5.7999], [53.1748, 5.4138]],
+        "disruptions": 25
+    },
+    {
+        "name": "Leeuwarden - Stavoren",
+        "coords": [[53.2012, 5.7999], [52.8865, 5.3628]],
+        "disruptions": 21
+    },
+    {
+        "name": "Leiden - Alphen a/d Rijn",
+        "coords": [[52.1497, 4.4931], [52.1277, 4.6689]],
+        "disruptions": 15
+    },
+    {
+        "name": "Leiden - Den Haag",
+        "coords": [[52.1497, 4.4931], [52.0705, 4.3007]],
+        "disruptions": 74
+    },
+    {
+        "name": "Leiden - Den Haag HS",
+        "coords": [[52.1497, 4.4931], [52.0698, 4.3195]],
+        "disruptions": 16
+    },
+    {
+        "name": "Leiden - Duivendrecht - Lelystad",
+        "coords": [[52.1497, 4.4931], [52.3237, 4.9366], [52.5063, 5.4751]],
+        "disruptions": 8
+    },
+    {
+        "name": "Leiden - Rotterdam",
+        "coords": [[52.1497, 4.4931], [51.9244, 4.4777]],
+        "disruptions": 12
+    },
+    {
+        "name": "Leiden - Schiphol - Zaandam",
+        "coords": [[52.1497, 4.4931], [52.3091, 4.7619], [52.4381, 4.8293]],
+        "disruptions": 4
+    },
+    {
+        "name": "Leiden Centraal",
+        "coords": [[52.1497, 4.4931]],
+        "disruptions": 7
+    },
+    {
+        "name": "Lelystad - Zwolle",
+        "coords": [[52.5063, 5.4751], [52.5168, 6.0830]],
+        "disruptions": 26
+    },
+    {
+        "name": "Lelystad Centrum",
+        "coords": [[52.5063, 5.4751]],
+        "disruptions": 1
+    },
+    {
+        "name": "Maastricht",
+        "coords": [[50.8514, 5.6909]],
+        "disruptions": 2
+    },
+    {
+        "name": "Maastricht - Hasselt",
+        "coords": [[50.8514, 5.6909], [50.9307, 5.3388]],
+        "disruptions": 1
+    },
+    {
+        "name": "Maastricht - Heerlen - Aachen",
+        "coords": [[50.8514, 5.6909], [50.8882, 5.9798], [50.7759, 6.0896]],
+        "disruptions": 8
+    },
+    {
+        "name": "Maastricht - Liège / Luik",
+        "coords": [[50.8514, 5.6909], [50.6451, 5.5734]],
+        "disruptions": 17
+    },
+    {
+        "name": "Maastricht - Randwijck",
+        "coords": [[50.8514, 5.6909], [50.8378, 5.7165]],
+        "disruptions": 14
+    },
+    {
+        "name": "Meppel",
+        "coords": [[52.6913, 6.1939]],
+        "disruptions": 1
+    },
+    {
+        "name": "Meppel - Leeuwarden",
+        "coords": [[52.6913, 6.1939], [53.2012, 5.7999]],
+        "disruptions": 31
+    },
+    {
+        "name": "Naarden-Bussum",
+        "coords": [[52.2789, 5.1626]],
+        "disruptions": 1
+    },
+    {
+        "name": "Nijmegen",
+        "coords": [[51.8426, 5.8546]],
+        "disruptions": 3
+    },
+    {
+        "name": "Nijmegen - Roermond",
+        "coords": [[51.8426, 5.8546], [51.1941, 5.9875]],
+        "disruptions": 4
+    },
+    {
+        "name": "Nijmegen - 's-Hertogenbosch",
+        "coords": [[51.8426, 5.8546], [51.6905, 5.2935]],
+        "disruptions": 49
+    },
+    {
+        "name": "Nijmegen - Venlo",
+        "coords": [[51.8426, 5.8546], [51.3649, 6.1724]],
+        "disruptions": 51
+    },
+    {
+        "name": "Nijmegen - Venray",
+        "coords": [[51.8426, 5.8546], [51.5301, 5.9752]],
+        "disruptions": 17
+    },
+    {
+        "name": "Nijmegen - Wijchen",
+        "coords": [[51.8426, 5.8546], [51.8090, 5.7308]],
+        "disruptions": 11
+    },
+    {
+        "name": "Purmerend",
+        "coords": [[52.5050, 4.9594]],
+        "disruptions": 1
+    },
+    {
+        "name": "Rilland-Bath",
+        "coords": [[51.4217, 4.1798]],
+        "disruptions": 1
+    },
+    {
+        "name": "Roermond",
+        "coords": [[51.1941, 5.9875]],
+        "disruptions": 1
+    },
+    {
+        "name": "Roermond - Sittard",
+        "coords": [[51.1941, 5.9875], [50.9989, 5.8691]],
+        "disruptions": 47
+    },
+    {
+        "name": "Roermond - Maastricht - Maastricht Randwyck",
+        "coords": [[51.1941, 5.9875], [50.8514, 5.6909], [50.8378, 5.7165]],
+        "disruptions": 1
+    },
+    {
+        "name": "Roosendaal",
+        "coords": [[51.5315, 4.4586]],
+        "disruptions": 3
+    },
+    {
+        "name": "Roosendaal - Antwerpen",
+        "coords": [[51.5315, 4.4586], [51.2172, 4.4213]],
+        "disruptions": 1
+    },
+    {
+        "name": "Roosendaal - Antwerpen - Puurs",
+        "coords": [[51.5315, 4.4586], [51.2172, 4.4213], [51.2700, 4.2812]],
+        "disruptions": 14
+    },
+    {
+        "name": "Roosendaal - Essen (B)",
+        "coords": [[51.5315, 4.4586], [51.4667, 4.4667]],
+        "disruptions": 9
+    },
+    {
+        "name": "Roosendaal - Vlissingen",
+        "coords": [[51.5315, 4.4586], [51.4427, 3.5730]],
+        "disruptions": 134
+    },
+    {
+        "name": "Rotterdam - Breda",
+        "coords": [[51.9244, 4.4777], [51.5954, 4.7762]],
+        "disruptions": 199
+    },
+    {
+        "name": "Rotterdam - Breda - Brussel",
+        "coords": [[51.9244, 4.4777], [51.5954, 4.7762], [50.8503, 4.3517]],
+        "disruptions": 13
+    },
+    {
+        "name": "Rotterdam - Dordrecht",
+        "coords": [[51.9244, 4.4777], [51.8100, 4.6738]],
+        "disruptions": 139
+    },
+    {
+        "name": "Rotterdam - Gouda",
+        "coords": [[51.9244, 4.4777], [52.0168, 4.7087]],
+        "disruptions": 27
+    },
+    {
+        "name": "Rotterdam Centraal",
+        "coords": [[51.9244, 4.4777]],
+        "disruptions": 3
+    },
+    {
+        "name": "Schiedam Centrum",
+        "coords": [[51.9217, 4.4098]],
+        "disruptions": 1
+    },
+    {
+        "name": "Schiphol - Amersfoort",
+        "coords": [[52.3091, 4.7619], [52.1561, 5.3878]],
+        "disruptions": 48
+    },
+    {
+        "name": "Schiphol - Hoofddorp",
+        "coords": [[52.3091, 4.7619], [52.3022, 4.6907]],
+        "disruptions": 35
+    },
+    {
+        "name": "Schiphol - Leiden",
+        "coords": [[52.3091, 4.7619], [52.1497, 4.4931]],
+        "disruptions": 54
+    },
+    {
+        "name": "Schiphol - Lelystad",
+        "coords": [[52.3091, 4.7619], [52.5063, 5.4751]],
+        "disruptions": 7
+    },
+    {
+        "name": "Schiphol - Rotterdam",
+        "coords": [[52.3091, 4.7619], [51.9244, 4.4777]],
+        "disruptions": 75
+    },
+    {
+        "name": "Schiphol - Utrecht",
+        "coords": [[52.3091, 4.7619], [52.0907, 5.1098]],
+        "disruptions": 73
+    },
+    {
+        "name": "Schiphol - Utrecht - Nijmegen",
+        "coords": [[52.3091, 4.7619], [52.0907, 5.1098], [51.8426, 5.8546]],
+        "disruptions": 5
+    },
+    {
+        "name": "Schiphol Airport",
+        "coords": [[52.3091, 4.7619]],
+        "disruptions": 67
+    },
+    {
+        "name": "Schiphol - Zaandam",
+        "coords": [[52.3091, 4.7619], [52.4381, 4.8293]],
+        "disruptions": 1
+    },
+    {
+        "name": "’s-Hertogenbosch",
+        "coords": [[51.6905, 5.2935]],
+        "disruptions": 3
+    },
+    {
+        "name": "’s-Hertogenbosch - Eindhoven",
+        "coords": [[51.6905, 5.2935], [51.4416, 5.4697]],
+        "disruptions": 80
+    },
+    {
+        "name": "’s-Hertogenbosch - Oss",
+        "coords": [[51.6905, 5.2935], [51.7650, 5.5180]],
+        "disruptions": 10
+    },
+    {
+        "name": "’s-Hertogenbosch - Sittard",
+        "coords": [[51.6905, 5.2935], [50.9989, 5.8691]],
+        "disruptions": 3
+    },
+    {
+        "name": "’s-Hertogenbosch - Tilburg",
+        "coords": [[51.6905, 5.2935], [51.5605, 5.0836]],
+        "disruptions": 24
+    },
+    {
+        "name": "Sittard",
+        "coords": [[50.9989, 5.8691]],
+        "disruptions": 1
+    },
+    {
+        "name": "Sittard - Heerlen",
+        "coords": [[50.9989, 5.8691], [50.8882, 5.9798]],
+        "disruptions": 58
+    },
+    {
+        "name": "Sittard - Heerlen - Kerkrade",
+        "coords": [[50.9989, 5.8691], [50.8882, 5.9798], [50.8646, 6.0538]],
+        "disruptions": 2
+    },
+    {
+        "name": "Sittard - Maastricht",
+        "coords": [[50.9989, 5.8691], [50.8514, 5.6909]],
+        "disruptions": 32
+    },
+    {
+        "name": "Stavoren",
+        "coords": [[52.8865, 5.3628]],
+        "disruptions": 7
+    },
+    {
+        "name": "Tilburg",
+        "coords": [[51.5605, 5.0836]],
+        "disruptions": 2
+    },
+    {
+        "name": "Tilburg - Eindhoven",
+        "coords": [[51.5605, 5.0836], [51.4416, 5.4697]],
+        "disruptions": 40
+    },
+    {
+        "name": "Tilburg ’s-Hertogenbosch",
+        "coords": [[51.5605, 5.0836], [51.6905, 5.2935]],
+        "disruptions": 1
+    },
+    {
+        "name": "Tilburg Universiteit - Eindhoven",
+        "coords": [[51.5678, 5.0519], [51.4416, 5.4697]],
+        "disruptions": 15
+    },
+    {
+        "name": "Uitgeest",
+        "coords": [[52.5205, 4.7022]],
+        "disruptions": 1
+    },
+    {
+        "name": "Utrecht - Almere",
+        "coords": [[52.0907, 5.1098], [52.3703, 5.2194]],
+        "disruptions": 38
+    },
+    {
+        "name": "Utrecht - Amersfoort",
+        "coords": [[52.0907, 5.1098], [52.1561, 5.3878]],
+        "disruptions": 33
+    },
+    {
+        "name": "Utrecht - Amersfoort Schothorst",
+        "coords": [[52.0907, 5.1098], [52.1748, 5.3996]],
+        "disruptions": 24
+    },
+    {
+        "name": "Utrecht - Arnhem",
+        "coords": [[52.0907, 5.1098], [51.9851, 5.8987]],
+        "disruptions": 60
+    },
+    {
+        "name": "Utrecht - Baarn",
+        "coords": [[52.0907, 5.1098], [52.2088, 5.2866]],
+        "disruptions": 17
+    },
+    {
+        "name": "Utrecht - Breukelen",
+        "coords": [[52.0907, 5.1098], [52.1712, 4.9897]],
+        "disruptions": 19
+    },
+    {
+        "name": "Utrecht - Den Haag",
+        "coords": [[52.0907, 5.1098], [52.0705, 4.3007]],
+        "disruptions": 36
+    },
+    {
+        "name": "Utrecht - Eindhoven",
+        "coords": [[52.0907, 5.1098], [51.4416, 5.4697]],
+        "disruptions": 23
+    },
+    {
+        "name": "Utrecht - Gouda",
+        "coords": [[52.0907, 5.1098], [52.0168, 4.7087]],
+        "disruptions": 27
+    },
+    {
+        "name": "Utrecht - Hilversum",
+        "coords": [[52.0907, 5.1098], [52.2237, 5.1760]],
+        "disruptions": 21
+    },
+    {
+        "name": "Utrecht - Hilversum - Weesp",
+        "coords": [[52.0907, 5.1098], [52.2237, 5.1760], [52.3114, 5.0418]],
+        "disruptions": 6
+    },
+    {
+        "name": "Utrecht - Houten",
+        "coords": [[52.0907, 5.1098], [52.0346, 5.1686]],
+        "disruptions": 8
+    },
+    {
+        "name": "Utrecht - Leiden",
+        "coords": [[52.0907, 5.1098], [52.1497, 4.4931]],
+        "disruptions": 61
+    },
+    {
+        "name": "Utrecht - Rhenen",
+        "coords": [[52.0907, 5.1098], [51.9592, 5.5718]],
+        "disruptions": 18
+    },
+    {
+        "name": "Utrecht - Rotterdam",
+        "coords": [[52.0907, 5.1098], [51.9244, 4.4777]],
+        "disruptions": 93
+    },
+    {
+        "name": "Utrecht - ’s-Hertogenbosch",
+        "coords": [[52.0907, 5.1098], [51.6905, 5.2935]],
+        "disruptions": 89
+    },
+    {
+        "name": "Utrecht - Spoorwegmuseum",
+        "coords": [[52.0907, 5.1098], [52.0879, 5.1313]],
+        "disruptions": 4
+    },
+    {
+        "name": "Utrecht - Tiel",
+        "coords": [[52.0907, 5.1098], [51.8879, 5.4279]],
+        "disruptions": 35
+    },
+    {
+        "name": "Utrecht - Veenendaal",
+        "coords": [[52.0907, 5.1098], [52.0286, 5.5549]],
+        "disruptions": 8
+    },
+    {
+        "name": "Utrecht - Woerden",
+        "coords": [[52.0907, 5.1098], [52.0850, 4.8836]],
+        "disruptions": 15
+    },
+    {
+        "name": "Utrecht - Zwolle",
+        "coords": [[52.0907, 5.1098], [52.5168, 6.0830]],
+        "disruptions": 5
+    },
+    {
+        "name": "Utrecht Centraal",
+        "coords": [[52.0907, 5.1098]],
+        "disruptions": 7
+    },
+    {
+        "name": "Utrecht Overvecht",
+        "coords": [[52.1096, 5.1268]],
+        "disruptions": 1
+    },
+    {
+        "name": "Venlo",
+        "coords": [[51.3649, 6.1724]],
+        "disruptions": 3
+    },
+    {
+        "name": "Venlo - Mönchengladbach - Düsseldorf",
+        "coords": [[51.3649, 6.1724], [51.1982, 6.4460], [51.2211, 6.7928]],
+        "disruptions": 66
+    },
+    {
+        "name": "Venlo - Roermond",
+        "coords": [[51.3649, 6.1724], [51.1941, 5.9875]],
+        "disruptions": 58
+    },
+    {
+        "name": "Venlo Eindhoven Centraal",
+        "coords": [[51.3649, 6.1724], [51.4416, 5.4697]],
+        "disruptions": 1
+    },
+    {
+        "name": "Voorschoten",
+        "coords": [[52.1276, 4.4478]],
+        "disruptions": 1
+    },
+    {
+        "name": "Weert",
+        "coords": [[51.2516, 5.7035]],
+        "disruptions": 1
+    },
+    {
+        "name": "Weesp",
+        "coords": [[52.3114, 5.0418]],
+        "disruptions": 3
+    },
+    {
+        "name": "Woerden",
+        "coords": [[52.0850, 4.8836]],
+        "disruptions": 2
+    },
+    {
+        "name": "Zaandam",
+        "coords": [[52.4381, 4.8293]],
+        "disruptions": 3
+    },
+    {
+        "name": "Zutphen",
+        "coords": [[52.1388, 6.1958]],
+        "disruptions": 5
+    },
+    {
+        "name": "Zutphen - Hengelo",
+        "coords": [[52.1388, 6.1958], [52.2658, 6.7932]],
+        "disruptions": 49
+    },
+    {
+        "name": "Zutphen - Winterswijk",
+        "coords": [[52.1388, 6.1958], [51.9705, 6.7195]],
+        "disruptions": 22
+    },
+    {
+        "name": "Zwolle",
+        "coords": [[52.5168, 6.0830]],
+        "disruptions": 7
+    },
+    {
+        "name": "Zwolle - Almelo",
+        "coords": [[52.5168, 6.0830], [52.3568, 6.6625]],
+        "disruptions": 27
+    },
+    {
+        "name": "Zwolle - Arnhem",
+        "coords": [[52.5168, 6.0830], [51.9851, 5.8987]],
+        "disruptions": 3
+    },
+    {
+        "name": "Zwolle - Deventer",
+        "coords": [[52.5168, 6.0830], [52.2510, 6.1637]],
+        "disruptions": 35
+    },
+    {
+        "name": "Zwolle - Emmen",
+        "coords": [[52.5168, 6.0830], [52.7855, 6.8978]],
+        "disruptions": 31
+    },
+    {
+        "name": "Zwolle - Enschede",
+        "coords": [[52.5168, 6.0830], [52.2215, 6.8937]],
+        "disruptions": 9
+    },
+    {
+        "name": "Zwolle - Groningen",
+        "coords": [[52.5168, 6.0830], [53.2194, 6.5665]],
+        "disruptions": 110
+    },
+    {
+        "name": "Zwolle - Kampen",
+        "coords": [[52.5168, 6.0830], [52.5581, 5.9140]],
+        "disruptions": 12
+    },
+    {
+        "name": "Zwolle - Leeuwarden",
+        "coords": [[52.5168, 6.0830], [53.2012, 5.7999]],
+        "disruptions": 49
+    }
+]

@@ -7,11 +7,16 @@ document.addEventListener("DOMContentLoaded", function() {
     var ChartCanvas = document.getElementById('myChart');
     var ChartButton1 = document.getElementById('ChartButton1'); // Treinstoringen per maand
     var ChartButton2 = document.getElementById('ChartButton2'); // Oorzaak treinstoringen
+    var ChartButton3 = document.getElementById('ChartButton3'); // Add button 3
     var darkModeButton = document.getElementById('darkModeButton');
     var chartTitle = document.getElementById("chartTitle");
     var chartDescription = document.getElementById("chartDescription");
     var collapseButton = document.getElementById('collapseButton');
     var containerLeft = document.querySelector('.container-left');
+    var containerGraphs = document.querySelector('.container-graphs');
+
+    // Map variable
+    var map = null;
 
     // Collapse functionality
     collapseButton.addEventListener('click', function() {
@@ -47,21 +52,32 @@ document.addEventListener("DOMContentLoaded", function() {
                     beginAtZero: true,
                     ticks: {
                         autoSkip: true,
-                        maxTicksLimit: 10
+                        maxTicksLimit: 10,
+                        color: '#39394D'
+                    },
+                    grid: {
+                        color: '#E6E6E9'
                     }
                 },
                 x: {
                     ticks: {
-                        autoSkip: false,   //laat alle maanden zien
+                        autoSkip: false,
                         maxRotation: 45,
-                        minRotation: 45
+                        minRotation: 45,
+                        color: '#39394D'
+                    },
+                    grid: {
+                        color: '#E6E6E9'
                     }
                 }
             },
             plugins: {
                 legend: {
                     display: true,
-                    position: 'top'
+                    position: 'top',
+                    labels: {
+                        color: '#39394D'
+                    }
                 }
             },
             layout: {
@@ -78,7 +94,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // Functie om actieve button state te updaten
     function updateActiveButton(activeButton) {
         // Remove active class from all buttons
-        [ChartButton1, ChartButton2].forEach(button => {
+        [ChartButton1, ChartButton2, ChartButton3].forEach(button => {
             button.classList.remove('active');
         });
         // Add active class to clicked button
@@ -211,28 +227,167 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
-    // Knoppen koppelen aan functies met active state
+    // Functie om spoorkaart te laden
+    async function loadRailwayMap() {
+        try {
+            // Hide chart canvas
+            ChartCanvas.style.display = 'none';
+            
+            // Create or show map container
+            let mapContainer = document.getElementById('mapContainer');
+            if (!mapContainer) {
+                mapContainer = document.createElement('div');
+                mapContainer.id = 'mapContainer';
+                containerGraphs.appendChild(mapContainer);
+            }
+            mapContainer.style.display = 'block';
+
+            // Fetch railway data
+            const response = await fetch('/Data/train-map.json');
+            const trackData = await response.json();
+
+            // Initialize map if not already initialized
+            if (!map) {
+                map = L.map('mapContainer').setView([52.1326, 5.2913], 7);
+                
+                // Add tile layer (use a dark style if in dark mode)
+                const isDarkMode = body.classList.contains('dark-mode');
+                const tileLayer = isDarkMode ? 
+                    'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png' :
+                    'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+                
+                L.tileLayer(tileLayer, {
+                    maxZoom: 19,
+                    attribution: '© OpenStreetMap contributors'
+                }).addTo(map);
+
+                // Find maximum disruptions for color scaling
+                const maxDisruptions = Math.max(...trackData.map(track => track.disruptions));
+
+                // Add tracks to map
+                trackData.forEach(track => {
+                    // Skip single station entries (those with only one coordinate)
+                    if (track.coords.length <= 1) return;
+                    
+                    // Calculate color based on disruption count
+                    const percentage = track.disruptions / maxDisruptions;
+                    const color = percentage > 0.75 ? '#b10026' :
+                                percentage > 0.5 ? '#fc4e2a' :
+                                percentage > 0.25 ? '#feb24c' : 
+                                percentage > 0 ? '#ffeda0' : '#cccccc';
+
+                    // Create popup content
+                    const popupContent = `
+                        <b>${track.name}</b><br>
+                        Aantal storingen: ${track.disruptions}
+                    `;
+
+                    // Add track to map
+                    L.polyline(track.coords, {
+                        color: color,
+                        weight: 3,
+                        opacity: 0.8
+                    })
+                    .bindPopup(popupContent)
+                    .addTo(map);
+                });
+
+                // Add station markers for single coordinates
+                trackData.forEach(track => {
+                    if (track.coords.length === 1) {
+                        L.circle(track.coords[0], {
+                            color: '#003082',
+                            fillColor: '#003082',
+                            fillOpacity: 0.8,
+                            radius: 300
+                        })
+                        .bindPopup(`<b>${track.name}</b><br>Aantal storingen: ${track.disruptions}`)
+                        .addTo(map);
+                    }
+                });
+            }
+
+            // Update title and description
+            chartTitle.textContent = "Storingen op het spoor in 2024";
+            chartDescription.textContent = "Deze kaart toont de Nederlandse spoorwegen, waarbij de kleurintensiteit het aantal storingen per traject aangeeft. Rood betekent veel storingen (>75%), oranje gemiddeld (50-75%), geel weinig (25-50%), en lichtgeel zeer weinig (<25%) storingen. Stations zijn aangegeven met blauwe punten.";
+
+            // Trigger a resize event to ensure map renders correctly
+            setTimeout(() => {
+                map.invalidateSize();
+            }, 100);
+
+        } catch (error) {
+            console.error("Fout bij laden van kaart:", error);
+            chartDescription.textContent = "Er is een fout opgetreden bij het laden van de kaart.";
+        }
+    }
+
+    // Function to show chart and hide map
+    function showChart() {
+        ChartCanvas.style.display = 'block';
+        const mapContainer = document.getElementById('mapContainer');
+        if (mapContainer) {
+            mapContainer.style.display = 'none';
+        }
+    }
+
+    // Event listeners for buttons
     ChartButton1.addEventListener('click', function() {
         updateActiveButton(ChartButton1);
+        showChart();
         loadMonthlyDisruptions();
     });
     
     ChartButton2.addEventListener('click', function() {
         updateActiveButton(ChartButton2);
+        showChart();
         loadDisruptionCauses();
+    });
+
+    ChartButton3.addEventListener('click', function() {
+        updateActiveButton(ChartButton3);
+        loadRailwayMap();
     });
 
     // Functie om donkere modus te wisselen
     function toggleDarkMode() {
         body.classList.toggle('dark-mode');
-        if (body.classList.contains('dark-mode')) {
-            darkModeButton.textContent = '☀️ Light Mode';
-            ChartCanvas.style.backgroundColor = '#333';
-        } else {
-            darkModeButton.textContent = '🌙 Dark Mode';
-            ChartCanvas.style.backgroundColor = '#fff';
-        }
+        const isDarkMode = body.classList.contains('dark-mode');
+        
+        // Update button text
+        darkModeButton.textContent = isDarkMode ? '☀️ Light Mode' : '🌙 Dark Mode';
+        
+        // Update chart colors
+        const textColor = isDarkMode ? '#ffffff' : '#39394D';
+        const gridColor = isDarkMode ? '#404040' : '#E6E6E9';
+        const backgroundColor = isDarkMode ? '#2d2d2d' : '#ffffff';
+        
+        // Update chart background and colors
+        ChartCanvas.style.backgroundColor = backgroundColor;
+        myChart.options.plugins.legend.labels.color = textColor;
+        myChart.options.scales.x.ticks.color = textColor;
+        myChart.options.scales.y.ticks.color = textColor;
+        myChart.options.scales.x.grid.color = gridColor;
+        myChart.options.scales.y.grid.color = gridColor;
         myChart.update();
+
+        // Update map style if it exists
+        if (map) {
+            const tileLayer = isDarkMode ? 
+                'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png' :
+                'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+            
+            map.eachLayer((layer) => {
+                if (layer instanceof L.TileLayer) {
+                    map.removeLayer(layer);
+                }
+            });
+            
+            L.tileLayer(tileLayer, {
+                maxZoom: 19,
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(map);
+        }
     }
 
     // Knop koppelen aan donkere modus
