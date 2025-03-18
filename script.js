@@ -341,7 +341,10 @@ document.addEventListener("DOMContentLoaded", function() {
             // Toon de chart canvas en verberg de map indien nodig
             showChart();
             
-            const response = await fetch('/Data/disruptions-2024.json');
+            const response = await fetch('./Data/disruptions-2024.json');
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
             const data = await response.json();
 
             // Vertalingen voor oorzaakgroepen
@@ -452,6 +455,11 @@ document.addEventListener("DOMContentLoaded", function() {
 
         } catch (error) {
             console.error("Fout bij laden van data:", error);
+            chartDescription.textContent = "Er is een fout opgetreden bij het laden van de data. Controleer of het bestand beschikbaar is.";
+            // Reset chart to empty state
+            myChart.data.labels = [];
+            myChart.data.datasets = [];
+            myChart.update();
         }
     }
 
