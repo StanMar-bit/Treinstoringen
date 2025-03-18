@@ -7,7 +7,8 @@ document.addEventListener("DOMContentLoaded", function() {
     var ChartCanvas = document.getElementById('myChart');
     var ChartButton1 = document.getElementById('ChartButton1'); // Treinstoringen per maand
     var ChartButton2 = document.getElementById('ChartButton2'); // Oorzaak treinstoringen
-    var ChartButton3 = document.getElementById('ChartButton3'); // Add button 3
+    var ChartButton3 = document.getElementById('ChartButton3'); // Storingen op het spoor
+    var ChartButton4 = document.getElementById('ChartButton4'); // Oorzaken per maand
     var darkModeButton = document.getElementById('darkModeButton');
     var chartTitle = document.getElementById("chartTitle");
     var chartDescription = document.getElementById("chartDescription");
@@ -94,7 +95,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // Functie om actieve button state te updaten
     function updateActiveButton(activeButton) {
         // Remove active class from all buttons
-        [ChartButton1, ChartButton2, ChartButton3].forEach(button => {
+        [ChartButton1, ChartButton2, ChartButton3, ChartButton4].forEach(button => {
             button.classList.remove('active');
         });
         // Add active class to clicked button
@@ -141,10 +142,13 @@ document.addEventListener("DOMContentLoaded", function() {
 
             // Grafiek bijwerken
             myChart.data.labels = labels;
-            myChart.data.datasets[0].data = values;
-            myChart.data.datasets[0].label = 'Aantal storingen per maand';
-            myChart.data.datasets[0].backgroundColor = blauwColor;
-            myChart.data.datasets[0].borderColor = blauwColor;
+            myChart.data.datasets = [{
+                label: 'Aantal storingen per maand',
+                data: values,
+                borderWidth: 1,
+                backgroundColor: blauwColor,
+                borderColor: blauwColor
+            }];
 
             // Update chart options for bar chart
             myChart.options.scales.y.display = true;
@@ -183,8 +187,8 @@ document.addEventListener("DOMContentLoaded", function() {
             // Groeperen en tellen per oorzaakstype (`cause_group`)
             const causeCounts = {};
             data.forEach(item => {
-                const cause = item.cause_group || "unknown"; // Fallback voor ontbrekende data
-                const translatedCause = causeTranslations[cause] || cause; // Gebruik vertaling of origineel als geen vertaling bestaat
+                const cause = item.cause_group || "unknown";
+                const translatedCause = causeTranslations[cause] || cause;
                 causeCounts[translatedCause] = (causeCounts[translatedCause] || 0) + 1;
             });
 
@@ -197,21 +201,21 @@ document.addEventListener("DOMContentLoaded", function() {
             
             // Grafiek bijwerken
             myChart.data.labels = labels;
-            myChart.data.datasets[0].data = values;
-            myChart.data.datasets[0].label = 'Aantal storingen per oorzaak';
+            myChart.data.datasets = [{
+                label: 'Aantal storingen per oorzaak',
+                data: values,
+                backgroundColor: [
+                    '#003082',  // Main blue
+                    '#FFC917',  // Main yellow
+                    '#E6E6E9',  // Main grey
+                    '#4D79B3',  // Lighter blue
+                    '#FFE066',  // Lighter yellow
+                    '#999999',  // Darker grey
+                    '#001F52',  // Darker blue
+                    '#CC9900',  // Darker yellow
+                ]
+            }];
             
-            // Colors for pie chart
-            myChart.data.datasets[0].backgroundColor = [
-                '#003082',  // Main blue
-                '#FFC917',  // Main yellow
-                '#E6E6E9',  // Main grey
-                '#4D79B3',  // Lighter blue
-                '#FFE066',  // Lighter yellow
-                '#999999',  // Darker grey
-                '#001F52',  // Darker blue
-                '#CC9900',  // Darker yellow
-            ];
-
             // Hide scales for pie chart
             myChart.options.scales.y.display = false;
             myChart.options.scales.x.display = false;
@@ -331,6 +335,126 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
+    // Functie om oorzaken per maand te laden (line chart)
+    async function loadCausesPerMonth() {
+        try {
+            // Toon de chart canvas en verberg de map indien nodig
+            showChart();
+            
+            const response = await fetch('/Data/disruptions-2024.json');
+            const data = await response.json();
+
+            // Vertalingen voor oorzaakgroepen
+            const causeTranslations = {
+                'staff': 'Personeel',
+                'external': 'Externe factoren',
+                'infrastructure': 'Infrastructuur',
+                'rolling stock': 'Materieel',
+                'weather': 'Weer',
+                'accidents': 'Ongelukken',
+                'logistical': 'Logistiek',
+                'engineering work': 'Technisch werk',
+                'unknown': 'Onbekend'
+            };
+
+            // Maanden in Nederlands
+            const monthNames = {
+                '01': 'Januari',
+                '02': 'Februari',
+                '03': 'Maart',
+                '04': 'April',
+                '05': 'Mei',
+                '06': 'Juni',
+                '07': 'Juli',
+                '08': 'Augustus',
+                '09': 'September',
+                '10': 'Oktober',
+                '11': 'November',
+                '12': 'December'
+            };
+
+            // Alle maanden van het jaar voorbereiden (sortering)
+            const allMonths = Object.values(monthNames);
+            
+            // Groeperen per oorzaak en maand
+            const causesPerMonth = {};
+            
+            data.forEach(item => {
+                const date = new Date(item.start_time);
+                const monthNum = String(date.getMonth() + 1).padStart(2, '0');
+                const monthName = monthNames[monthNum];
+                
+                const cause = item.cause_group || "unknown";
+                const translatedCause = causeTranslations[cause] || cause;
+                
+                // Initialiseer de oorzaak als het nog niet bestaat
+                if (!causesPerMonth[translatedCause]) {
+                    causesPerMonth[translatedCause] = {};
+                    allMonths.forEach(month => {
+                        causesPerMonth[translatedCause][month] = 0;
+                    });
+                }
+                
+                // Tel de storing voor deze oorzaak en maand
+                causesPerMonth[translatedCause][monthName] = (causesPerMonth[translatedCause][monthName] || 0) + 1;
+            });
+
+            // Datasets voor de chart maken
+            const datasets = [];
+            const colors = [
+                '#003082',  // Main blue
+                '#FFC917',  // Main yellow
+                '#E6E6E9',  // Main grey
+                '#4D79B3',  // Lighter blue
+                '#FFE066',  // Lighter yellow
+                '#999999',  // Darker grey
+                '#001F52',  // Darker blue
+                '#CC9900',  // Darker yellow
+                '#5D8AA8',  // Blue
+                '#A52A2A',  // Brown
+            ];
+
+            // Maak een dataset per oorzaak
+            let colorIndex = 0;
+            for (const cause in causesPerMonth) {
+                const values = allMonths.map(month => causesPerMonth[cause][month]);
+                
+                datasets.push({
+                    label: cause,
+                    data: values,
+                    borderColor: colors[colorIndex % colors.length],
+                    backgroundColor: colors[colorIndex % colors.length] + '33', // transparante versie
+                    borderWidth: 2,
+                    tension: 0.2,  // licht gebogen lijnen
+                    fill: false
+                });
+                
+                colorIndex++;
+            }
+
+            // Set chart type to line
+            myChart.config.type = 'line';
+            
+            // Grafiek bijwerken
+            myChart.data.labels = allMonths;
+            myChart.data.datasets = datasets;
+            
+            // Update chart options for line chart
+            myChart.options.scales.y.display = true;
+            myChart.options.scales.x.display = true;
+            myChart.options.plugins.legend.display = true;
+            
+            myChart.update();
+
+            // Titel en beschrijving updaten
+            chartTitle.textContent = "Oorzaken van storingen per maand in 2024";
+            chartDescription.textContent = "Deze grafiek toont hoe de verschillende oorzaken van treinstoringen per maand zijn verdeeld. Elke lijn vertegenwoordigt een andere categorie van storingen.";
+
+        } catch (error) {
+            console.error("Fout bij laden van data:", error);
+        }
+    }
+
     // Event listeners for buttons
     ChartButton1.addEventListener('click', function() {
         updateActiveButton(ChartButton1);
@@ -347,6 +471,11 @@ document.addEventListener("DOMContentLoaded", function() {
     ChartButton3.addEventListener('click', function() {
         updateActiveButton(ChartButton3);
         loadRailwayMap();
+    });
+
+    ChartButton4.addEventListener('click', function() {
+        updateActiveButton(ChartButton4);
+        loadCausesPerMonth();
     });
 
     // Functie om donkere modus te wisselen
