@@ -19,6 +19,18 @@ document.addEventListener("DOMContentLoaded", function() {
     // Map variable
     var map = null;
 
+    // Voeg toe aan het begin waar alle variabelen worden gedeclareerd
+    var currentYear = "2024"; // Standaard jaar
+    var currentChartType = "monthly"; // Huidige grafiektype: "monthly", "causes", "map", of "causesPerMonth"
+
+    // Elements voor de jaarselector
+    var yearPrevButton = document.querySelector('.year-prev');
+    var yearNextButton = document.querySelector('.year-next');
+    var yearDisplay = document.querySelector('.current-year-display');
+
+    // Array met beschikbare jaren (van meest recent naar ouder)
+    const availableYears = ["2024", "2023", "2022", "2021", "2020", "2019", "2018", "2017", "2016", "2015", "2014", "2013", "2012", "2011"];
+
     // Collapse functionality
     collapseButton.addEventListener('click', function() {
         containerLeft.classList.toggle('collapsed');
@@ -102,10 +114,68 @@ document.addEventListener("DOMContentLoaded", function() {
         activeButton.classList.add('active');
     }
 
-    // Functie om treinstoringen per maand te laden
+    // Functie om jaar weer te geven
+    function updateYearDisplay() {
+        yearDisplay.textContent = currentYear;
+    }
+
+    // Event listeners voor de pijltjes-knoppen
+    yearPrevButton.addEventListener('click', function() {
+        const currentIndex = availableYears.indexOf(currentYear);
+        if (currentIndex < availableYears.length - 1) {
+            currentYear = availableYears[currentIndex + 1];
+            updateYearDisplay();
+            reloadCurrentChart();
+        }
+    });
+
+    yearNextButton.addEventListener('click', function() {
+        const currentIndex = availableYears.indexOf(currentYear);
+        if (currentIndex > 0) {
+            currentYear = availableYears[currentIndex - 1];
+            updateYearDisplay();
+            reloadCurrentChart();
+        }
+    });
+
+    // Functie om huidige grafiek te herladen met nieuw jaar
+    function reloadCurrentChart() {
+        switch(currentChartType) {
+            case "monthly":
+                loadMonthlyDisruptions();
+                break;
+            case "causes":
+                loadDisruptionCauses();
+                break;
+            case "map":
+                loadRailwayMap();
+                break;
+            case "causesPerMonth":
+                loadCausesPerMonth();
+                break;
+        }
+    }
+
+    // Voeg deze functie toe om klassen toe te voegen/verwijderen voor specifieke grafiektypen
+    function updateChartTypeClass(chartType) {
+        document.body.classList.remove('line-chart-active');
+        
+        if (chartType === "causesPerMonth") {
+            document.body.classList.add('line-chart-active');
+        }
+    }
+
+    // Wijzig de loadMonthlyDisruptions functie om het jaar te gebruiken
     async function loadMonthlyDisruptions() {
         try {
-            const response = await fetch('/Data/disruptions-2024.json');
+            currentChartType = "monthly";
+            showChart();
+            updateChartTypeClass("monthly");
+            
+            const response = await fetch(`./Data/disruptions-${currentYear}.json`);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
             const data = await response.json();
 
             // Maanden in Nederlands
@@ -157,18 +227,34 @@ document.addEventListener("DOMContentLoaded", function() {
             myChart.update();
 
             // Titel en beschrijving updaten
-            chartTitle.textContent = "Aantal storingen per maand in 2024";
-            chartDescription.textContent = "Deze grafiek toont het aantal treinstoringen per maand in 2024. De blauwe balken geven het totale aantal storingen weer voor elke maand.";
+            chartTitle.textContent = `Aantal storingen per maand in ${currentYear}`;
+            chartDescription.textContent = `Deze grafiek toont het aantal treinstoringen per maand in ${currentYear}. De blauwe balken geven het totale aantal storingen weer voor elke maand.`;
 
         } catch (error) {
             console.error("Fout bij laden van data:", error);
+            chartDescription.textContent = `Er is een fout opgetreden bij het laden van data voor ${currentYear}. Mogelijk zijn er geen gegevens beschikbaar voor dit jaar.`;
+            myChart.data.labels = [];
+            myChart.data.datasets = [{
+                label: 'Geen data beschikbaar',
+                data: [],
+                backgroundColor: blauwColor,
+                borderColor: blauwColor
+            }];
+            myChart.update();
         }
     }
 
-    // Functie om oorzaken van treinstoringen te laden
+    // Wijzig de loadDisruptionCauses functie om het jaar te gebruiken
     async function loadDisruptionCauses() {
         try {
-            const response = await fetch('/Data/disruptions-2024.json');
+            currentChartType = "causes";
+            showChart();
+            updateChartTypeClass("causes");
+            
+            const response = await fetch(`./Data/disruptions-${currentYear}.json`);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
             const data = await response.json();
 
             // Vertalingen voor oorzaakgroepen
@@ -223,125 +309,30 @@ document.addEventListener("DOMContentLoaded", function() {
             myChart.update();
 
             // Titel en beschrijving updaten
-            chartTitle.textContent = "Oorzaken van treinstoringen in 2024";
-            chartDescription.textContent = "Deze cirkeldiagram laat zien hoe de verschillende oorzaken van treinstoringen zijn verdeeld. Elke kleur vertegenwoordigt een andere categorie van storingen.";
+            chartTitle.textContent = `Oorzaken van treinstoringen in ${currentYear}`;
+            chartDescription.textContent = `Deze cirkeldiagram laat zien hoe de verschillende oorzaken van treinstoringen zijn verdeeld in ${currentYear}. Elke kleur vertegenwoordigt een andere categorie van storingen.`;
 
         } catch (error) {
             console.error("Fout bij laden van data:", error);
+            chartDescription.textContent = `Er is een fout opgetreden bij het laden van data voor ${currentYear}. Mogelijk zijn er geen gegevens beschikbaar voor dit jaar.`;
+            myChart.data.labels = ['Geen data beschikbaar'];
+            myChart.data.datasets = [{
+                label: 'Geen data beschikbaar',
+                data: [1],
+                backgroundColor: ['#E6E6E9']
+            }];
+            myChart.update();
         }
     }
 
-    // Functie om spoorkaart te laden
-    async function loadRailwayMap() {
-        try {
-            // Hide chart canvas
-            ChartCanvas.style.display = 'none';
-            
-            // Create or show map container
-            let mapContainer = document.getElementById('mapContainer');
-            if (!mapContainer) {
-                mapContainer = document.createElement('div');
-                mapContainer.id = 'mapContainer';
-                containerGraphs.appendChild(mapContainer);
-            }
-            mapContainer.style.display = 'block';
-
-            // Fetch railway data
-            const response = await fetch('/Data/train-map.json');
-            const trackData = await response.json();
-
-            // Initialize map if not already initialized
-            if (!map) {
-                map = L.map('mapContainer').setView([52.1326, 5.2913], 7);
-                
-                // Add tile layer (use a dark style if in dark mode)
-                const isDarkMode = body.classList.contains('dark-mode');
-                const tileLayer = isDarkMode ? 
-                    'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png' :
-                    'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-                
-                L.tileLayer(tileLayer, {
-                    maxZoom: 19,
-                    attribution: '© OpenStreetMap contributors'
-                }).addTo(map);
-
-                // Find maximum disruptions for color scaling
-                const maxDisruptions = Math.max(...trackData.map(track => track.disruptions));
-
-                // Add tracks to map
-                trackData.forEach(track => {
-                    // Skip single station entries (those with only one coordinate)
-                    if (track.coords.length <= 1) return;
-                    
-                    // Calculate color based on disruption count
-                    const percentage = track.disruptions / maxDisruptions;
-                    const color = percentage > 0.75 ? '#b10026' :
-                                percentage > 0.5 ? '#fc4e2a' :
-                                percentage > 0.25 ? '#feb24c' : 
-                                percentage > 0 ? '#ffeda0' : '#cccccc';
-
-                    // Create popup content
-                    const popupContent = `
-                        <b>${track.name}</b><br>
-                        Aantal storingen: ${track.disruptions}
-                    `;
-
-                    // Add track to map
-                    L.polyline(track.coords, {
-                        color: color,
-                        weight: 3,
-                        opacity: 0.8
-                    })
-                    .bindPopup(popupContent)
-                    .addTo(map);
-                });
-
-                // Add station markers for single coordinates
-                trackData.forEach(track => {
-                    if (track.coords.length === 1) {
-                        L.circle(track.coords[0], {
-                            color: '#003082',
-                            fillColor: '#003082',
-                            fillOpacity: 0.8,
-                            radius: 300
-                        })
-                        .bindPopup(`<b>${track.name}</b><br>Aantal storingen: ${track.disruptions}`)
-                        .addTo(map);
-                    }
-                });
-            }
-
-            // Update title and description
-            chartTitle.textContent = "Storingen op het spoor in 2024";
-            chartDescription.textContent = "Deze kaart toont de Nederlandse spoorwegen, waarbij de kleurintensiteit het aantal storingen per traject aangeeft. Rood betekent veel storingen (>75%), oranje gemiddeld (50-75%), geel weinig (25-50%), en lichtgeel zeer weinig (<25%) storingen. Stations zijn aangegeven met blauwe punten.";
-
-            // Trigger a resize event to ensure map renders correctly
-            setTimeout(() => {
-                map.invalidateSize();
-            }, 100);
-
-        } catch (error) {
-            console.error("Fout bij laden van kaart:", error);
-            chartDescription.textContent = "Er is een fout opgetreden bij het laden van de kaart.";
-        }
-    }
-
-    // Function to show chart and hide map
-    function showChart() {
-        ChartCanvas.style.display = 'block';
-        const mapContainer = document.getElementById('mapContainer');
-        if (mapContainer) {
-            mapContainer.style.display = 'none';
-        }
-    }
-
-    // Functie om oorzaken per maand te laden (line chart)
+    // Wijzig ook loadCausesPerMonth om jaren te ondersteunen
     async function loadCausesPerMonth() {
         try {
-            // Toon de chart canvas en verberg de map indien nodig
+            currentChartType = "causesPerMonth";
             showChart();
+            updateChartTypeClass("causesPerMonth");
             
-            const response = await fetch('./Data/disruptions-2024.json');
+            const response = await fetch(`./Data/disruptions-${currentYear}.json`);
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
@@ -450,16 +441,122 @@ document.addEventListener("DOMContentLoaded", function() {
             myChart.update();
 
             // Titel en beschrijving updaten
-            chartTitle.textContent = "Oorzaken van storingen per maand in 2024";
-            chartDescription.textContent = "Deze grafiek toont hoe de verschillende oorzaken van treinstoringen per maand zijn verdeeld. Elke lijn vertegenwoordigt een andere categorie van storingen.";
+            chartTitle.textContent = `Oorzaken van storingen per maand in ${currentYear}`;
+            chartDescription.textContent = `Deze grafiek toont hoe de verschillende oorzaken van treinstoringen per maand zijn verdeeld in ${currentYear}. Elke lijn vertegenwoordigt een andere categorie van storingen.`;
 
         } catch (error) {
             console.error("Fout bij laden van data:", error);
-            chartDescription.textContent = "Er is een fout opgetreden bij het laden van de data. Controleer of het bestand beschikbaar is.";
-            // Reset chart to empty state
+            chartDescription.textContent = `Er is een fout opgetreden bij het laden van data voor ${currentYear}. Mogelijk zijn er geen gegevens beschikbaar voor dit jaar.`;
             myChart.data.labels = [];
             myChart.data.datasets = [];
             myChart.update();
+        }
+    }
+
+    // Eventueel aanpassen van de kaartfunctie om het jaar te gebruiken
+    async function loadRailwayMap() {
+        try {
+            currentChartType = "map";
+            updateChartTypeClass("map");
+            
+            // Hide chart canvas
+            ChartCanvas.style.display = 'none';
+            
+            // Create or show map container
+            let mapContainer = document.getElementById('mapContainer');
+            if (!mapContainer) {
+                mapContainer = document.createElement('div');
+                mapContainer.id = 'mapContainer';
+                containerGraphs.appendChild(mapContainer);
+            }
+            mapContainer.style.display = 'block';
+
+            // Fetch railway data
+            const response = await fetch('/Data/train-map.json');
+            const trackData = await response.json();
+
+            // Initialize map if not already initialized
+            if (!map) {
+                map = L.map('mapContainer').setView([52.1326, 5.2913], 7);
+                
+                // Add tile layer (use a dark style if in dark mode)
+                const isDarkMode = body.classList.contains('dark-mode');
+                const tileLayer = isDarkMode ? 
+                    'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png' :
+                    'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+                
+                L.tileLayer(tileLayer, {
+                    maxZoom: 19,
+                    attribution: '© OpenStreetMap contributors'
+                }).addTo(map);
+
+                // Find maximum disruptions for color scaling
+                const maxDisruptions = Math.max(...trackData.map(track => track.disruptions));
+
+                // Add tracks to map
+                trackData.forEach(track => {
+                    // Skip single station entries (those with only one coordinate)
+                    if (track.coords.length <= 1) return;
+                    
+                    // Calculate color based on disruption count
+                    const percentage = track.disruptions / maxDisruptions;
+                    const color = percentage > 0.75 ? '#b10026' :
+                                percentage > 0.5 ? '#fc4e2a' :
+                                percentage > 0.25 ? '#feb24c' : 
+                                percentage > 0 ? '#ffeda0' : '#cccccc';
+
+                    // Create popup content
+                    const popupContent = `
+                        <b>${track.name}</b><br>
+                        Aantal storingen: ${track.disruptions}
+                    `;
+
+                    // Add track to map
+                    L.polyline(track.coords, {
+                        color: color,
+                        weight: 3,
+                        opacity: 0.8
+                    })
+                    .bindPopup(popupContent)
+                    .addTo(map);
+                });
+
+                // Add station markers for single coordinates
+                trackData.forEach(track => {
+                    if (track.coords.length === 1) {
+                        L.circle(track.coords[0], {
+                            color: '#003082',
+                            fillColor: '#003082',
+                            fillOpacity: 0.8,
+                            radius: 300
+                        })
+                        .bindPopup(`<b>${track.name}</b><br>Aantal storingen: ${track.disruptions}`)
+                        .addTo(map);
+                    }
+                });
+            }
+
+            // Update title and description
+            chartTitle.textContent = `Storingen op het spoor in ${currentYear}`;
+            chartDescription.textContent = `Deze kaart toont de Nederlandse spoorwegen, waarbij de kleurintensiteit het aantal storingen per traject aangeeft in ${currentYear}. Rood betekent veel storingen (>75%), oranje gemiddeld (50-75%), geel weinig (25-50%), en lichtgeel zeer weinig (<25%) storingen. Stations zijn aangegeven met blauwe punten.`;
+
+            // Trigger a resize event to ensure map renders correctly
+            setTimeout(() => {
+                map.invalidateSize();
+            }, 100);
+
+        } catch (error) {
+            console.error("Fout bij laden van kaart:", error);
+            chartDescription.textContent = "Er is een fout opgetreden bij het laden van de kaart.";
+        }
+    }
+
+    // Function to show chart and hide map
+    function showChart() {
+        ChartCanvas.style.display = 'block';
+        const mapContainer = document.getElementById('mapContainer');
+        if (mapContainer) {
+            mapContainer.style.display = 'none';
         }
     }
 
@@ -533,4 +630,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // Load initial graph and set active state
     loadMonthlyDisruptions();
     updateActiveButton(ChartButton1);
+
+    // Bij het laden van de pagina, activeer de knop voor het standaard jaar
+    updateYearDisplay();
 });
