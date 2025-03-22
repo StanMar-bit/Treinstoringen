@@ -34,6 +34,7 @@ document.addEventListener("DOMContentLoaded", function() {
     let currentYear = "2024"; // Default year
     let currentChartType = "monthly"; // Default chart type
     let map = null; // Map variable for Leaflet
+    let isDarkMode = false; // Track dark mode state
     
     // Available years (newest to oldest)
     const availableYears = ["2024", "2023", "2022", "2021", "2020", "2019", "2018", 
@@ -111,6 +112,119 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         }
     });
+
+    // ============= DARK MODE FUNCTIONALITY =============
+    
+    /**
+     * Checks if user's system prefers dark mode
+     * @returns {boolean} True if system prefers dark mode
+     */
+    function systemPrefersDarkMode() {
+        return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    }
+    
+    /**
+     * Listens for changes in system color scheme preference
+     */
+    function setupColorSchemeListener() {
+        if (window.matchMedia) {
+            const colorSchemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+            
+            // Use addEventListener for all modern browsers
+            try {
+                colorSchemeQuery.addEventListener('change', function(e) {
+                    // Only auto-switch if user hasn't manually toggled
+                    if (!localStorage.getItem('darkModeManuallySet')) {
+                        setDarkMode(e.matches);
+                    }
+                });
+            } catch (e) {
+                // Fallback for older browsers without triggering deprecation warning
+                // This approach avoids using the deprecated addListener method directly
+                if (typeof colorSchemeQuery.onchange !== 'undefined') {
+                    colorSchemeQuery.onchange = function(e) {
+                        if (!localStorage.getItem('darkModeManuallySet')) {
+                            setDarkMode(e.matches);
+                        }
+                    };
+                }
+            }
+        }
+    }
+    
+    /**
+     * Sets dark mode state and updates UI
+     * @param {boolean} enableDark - Whether to enable or disable dark mode
+     */
+    function setDarkMode(enableDark) {
+        isDarkMode = enableDark;
+        
+        // Apply or remove dark mode class
+        if (isDarkMode) {
+            body.classList.add('dark-mode');
+            darkModeButton.textContent = '☀️ Light Mode';
+        } else {
+            body.classList.remove('dark-mode');
+            darkModeButton.textContent = '🌙 Dark Mode';
+        }
+        
+        // Update chart colors
+        updateChartColors();
+        
+        // Update map if it exists
+        updateMapStyle();
+    }
+    
+    /**
+     * Updates chart colors based on current theme
+     */
+    function updateChartColors() {
+        const textColor = isDarkMode ? '#ffffff' : '#39394D';
+        const gridColor = isDarkMode ? '#404040' : '#E6E6E9';
+        const backgroundColor = isDarkMode ? '#2d2d2d' : '#ffffff';
+        
+        // Update chart styling
+        ChartCanvas.style.backgroundColor = backgroundColor;
+        myChart.options.plugins.legend.labels.color = textColor;
+        myChart.options.scales.x.ticks.color = textColor;
+        myChart.options.scales.y.ticks.color = textColor;
+        myChart.options.scales.x.grid.color = gridColor;
+        myChart.options.scales.y.grid.color = gridColor;
+        myChart.update();
+    }
+    
+    /**
+     * Updates map style based on current theme
+     */
+    function updateMapStyle() {
+        if (map) {
+            const tileLayer = isDarkMode ? 
+                'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png' :
+                'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+            
+            map.eachLayer((layer) => {
+                if (layer instanceof L.TileLayer) {
+                    map.removeLayer(layer);
+                }
+            });
+            
+            L.tileLayer(tileLayer, {
+                maxZoom: 19,
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(map);
+        }
+    }
+    
+    /**
+     * Toggles dark mode on user request
+     */
+    function toggleDarkMode() {
+        // User has manually set preference
+        localStorage.setItem('darkModeManuallySet', 'true');
+        
+        // Toggle dark mode
+        setDarkMode(!isDarkMode);
+    }
 
     // ============= UTILITY FUNCTIONS =============
     
@@ -453,8 +567,7 @@ document.addEventListener("DOMContentLoaded", function() {
             if (!map) {
                 map = L.map('mapContainer').setView([52.1326, 5.2913], 7);
                 
-                // Add tile layer (use dark style if in dark mode)
-                const isDarkMode = body.classList.contains('dark-mode');
+                // Add tile layer based on current theme
                 const tileLayer = isDarkMode ? 
                     'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png' :
                     'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
@@ -525,51 +638,6 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
-    // ============= UI FUNCTIONALITY =============
-    
-    /**
-     * Toggles dark mode
-     */
-    function toggleDarkMode() {
-        body.classList.toggle('dark-mode');
-        const isDarkMode = body.classList.contains('dark-mode');
-        
-        // Update button text
-        darkModeButton.textContent = isDarkMode ? '☀️ Light Mode' : '🌙 Dark Mode';
-        
-        // Update chart colors
-        const textColor = isDarkMode ? '#ffffff' : '#39394D';
-        const gridColor = isDarkMode ? '#404040' : '#E6E6E9';
-        const backgroundColor = isDarkMode ? '#2d2d2d' : '#ffffff';
-        
-        // Update chart styling
-        ChartCanvas.style.backgroundColor = backgroundColor;
-        myChart.options.plugins.legend.labels.color = textColor;
-        myChart.options.scales.x.ticks.color = textColor;
-        myChart.options.scales.y.ticks.color = textColor;
-        myChart.options.scales.x.grid.color = gridColor;
-        myChart.options.scales.y.grid.color = gridColor;
-        myChart.update();
-
-        // Update map style if it exists
-        if (map) {
-            const tileLayer = isDarkMode ? 
-                'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png' :
-                'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-            
-            map.eachLayer((layer) => {
-                if (layer instanceof L.TileLayer) {
-                    map.removeLayer(layer);
-                }
-            });
-            
-            L.tileLayer(tileLayer, {
-                maxZoom: 19,
-                attribution: '© OpenStreetMap contributors'
-            }).addTo(map);
-        }
-    }
-
     // ============= EVENT LISTENERS =============
     
     // Chart selector change event
@@ -593,14 +661,38 @@ document.addEventListener("DOMContentLoaded", function() {
         }, 300);
     });
     
-    // Dark mode toggle
+    // Dark mode toggle button
     darkModeButton.addEventListener('click', toggleDarkMode);
 
     // ============= INITIALIZATION =============
-    // Set initial dropdown values
-    chartSelector.value = currentChartType;
-    yearSelector.value = currentYear;
     
-    // Load initial chart
-    loadSelectedChart();
+    /**
+     * Initialize the application
+     */
+    function init() {
+        // Check for saved dark mode preference or use system preference
+        const savedDarkMode = localStorage.getItem('darkModeManuallySet');
+        
+        if (savedDarkMode) {
+            // User has manually set preference before, read it from storage
+            const darkModeEnabled = localStorage.getItem('darkModeEnabled') === 'true';
+            setDarkMode(darkModeEnabled);
+        } else {
+            // Use system preference
+            setDarkMode(systemPrefersDarkMode());
+        }
+        
+        // Set up listener for system preference changes
+        setupColorSchemeListener();
+        
+        // Set initial dropdown values
+        chartSelector.value = currentChartType;
+        yearSelector.value = currentYear;
+        
+        // Load initial chart
+        loadSelectedChart();
+    }
+    
+    // Start the application
+    init();
 });
