@@ -1,41 +1,24 @@
 /* ==================== VARIABLES ==================== */
+/**
+ * Color palette and key variables for consistent styling
+ * The primary colors are:
+ * - Blue (blauw): Main brand color for headings, buttons, borders
+ * - Yellow (geel): Secondary color for accent elements
+ * - White (wit): Background for tiles and content areas
+ * - Gray (grijs): Page background and subtle elements
+ */
 :root {
-    --wit: #ffffff;
-    --blauw: #003091;
-    --geel: #FFC917;
-    --grijs: #E6E6E9;
+    --wit: #ffffff;     /* White - used for tile backgrounds */
+    --blauw: #003091;   /* Blue - primary brand color */
+    --geel: #FFC917;    /* Yellow - accent color */
+    --grijs: #E6E6E9;   /* Light gray - used for backgrounds */
 }
 
-/* ==================== LAYOUT COMPONENTS ==================== */
-/* Header styling */
-.header {
-    background-color: var(--wit);
-    width: 100%;
-    padding: 1rem;
-    box-sizing: border-box;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.header a {
-    color: var(--blauw);
-    text-decoration: none;
-    font-size: 1.5rem;
-    font-weight: bold;
-}
-
-.header a:hover {
-    text-decoration: underline;
-}
-
-.header-buttons {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-/* Base HTML elements */
+/* ==================== BASE STYLES ==================== */
+/**
+ * Fundamental page structure and typography
+ * Sets up the basic page layout and prevents overflow issues
+ */
 html, body {
     height: 100%;
     margin: 0;
@@ -43,93 +26,265 @@ html, body {
     flex-direction: column;
     font-family: Arial, sans-serif;
     overflow-x: hidden; /* Prevent horizontal scroll */
+    background-color: var(--grijs);
 }
 
+/* ==================== LAYOUT COMPONENTS ==================== */
+/**
+ * Main container structure
+ * The dashboard uses a flex-based layout system for responsive design
+ */
 /* Main container layout */
 .container-main {
     display: flex;
+    flex-direction: column;
     flex: 1;
     min-height: 0;
     max-width: 100%;
     box-sizing: border-box;
-    overflow: hidden;
-}
-
-/* Left sidebar */
-.container-left {
-    background-color: var(--geel);
-    width: 20%;
-    min-width: 60px;
-    position: relative;
-    transition: width 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    height: 100%;
-}
-
-.container-left.collapsed {
-    width: 60px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-}
-
-.container-left.collapsed .container-content {
-    display: none;
-}
-
-.container-content {
-    flex: 1;
-    overflow-y: auto;
     padding: 1rem;
 }
 
-/* Right content area */
-.container-right {
-    background-color: var(--grijs);
-    flex: 1;
-    padding: 1rem;
-    box-sizing: border-box;
-    overflow-y: auto;
-}
-
-.container-ui {
-    margin-bottom: 50px; /* Add space for collapse button */
-}
-
-.container-information {
-    height: auto;
-}
-
-.container-graphs {
-    height: 100%;
-    padding: 1rem;
-    box-sizing: border-box;
-}
-
-/* Footer styling */
-.container-footer {
+/* Dashboard container - holds all dashboard components */
+.dashboard-container {
     width: 100%;
-    text-align: center;
-    padding: 10px;
-    background-color: var(--wit);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem; /* Consistent spacing between elements */
 }
 
-.container-footer p {
+/**
+ * Common tile styling
+ * All tiles share the same base appearance (background, radius, shadow)
+ */
+/* Header and footer tiles */
+.header-tile, .footer-tile, .dashboard-info-tile, .year-selector-tile, .chart-tile {
+    background: var(--wit);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/**
+ * Header section styling
+ * Contains logo, site title, and controls
+ */
+/* Header tile specific styles */
+.header-tile {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 3px solid var(--geel); /* Yellow accent on top */
+}
+
+/* Site branding group - logo and title */
+.site-branding {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* Logo styling */
+.site-logo {
+    height: 40px;
+    width: auto;
+}
+
+/* Site title styling */
+.site-title {
+    color: var(--blauw);
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.site-title:hover {
+    text-decoration: underline;
+}
+
+/* Container for dark mode toggle and GitHub link */
+.controls-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/**
+ * Info and year selector row
+ * Contains dashboard title and year selection dropdown
+ */
+.info-year-row {
+    display: grid;
+    grid-template-columns: 3fr 1fr; /* 75% for info, 25% for year selector */
+    gap: 1.5rem;
+}
+
+/**
+ * Dashboard info tile
+ * Contains the dashboard title and description
+ */
+/* Dashboard info tile specific styles */
+.dashboard-info-tile {
+    border-left: 3px solid var(--geel); /* Yellow accent on left */
+}
+
+/* Dashboard title */
+.dashboard-info-tile h1 {
+    color: var(--blauw);
+    margin: 0 0 0.5rem 0;
+    font-size: 1.8rem;
+}
+
+/* Dashboard description text */
+.dashboard-description {
+    color: #39394D;
+    font-size: 1rem;
+    margin: 0;
+    line-height: 1.5;
+}
+
+/**
+ * Year selector tile
+ * Contains dropdown for selecting the data year
+ */
+/* Year selector tile specific styles */
+.year-selector-tile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Year selector label */
+.year-selector-tile label {
+    display: block;
+    font-weight: bold;
+    color: var(--blauw);
+    margin-bottom: 0.5rem;
+}
+
+/**
+ * Footer tile 
+ * Contains attribution and copyright information
+ */
+/* Footer tile specific styles */
+.footer-tile {
+    text-align: center;
+    border-bottom: 3px solid var(--geel); /* Yellow accent on bottom */
+    margin-bottom: 1rem;
+}
+
+/* Footer text */
+.footer-tile p {
     margin: 0;
     word-wrap: break-word;
     overflow-wrap: break-word;
     hyphens: auto;
 }
 
-.container-footer a {
+/* Footer links */
+.footer-tile a {
     word-wrap: break-word;
     overflow-wrap: break-word;
     display: inline-block;
+    color: var(--blauw);
+    text-decoration: none;
+}
+
+.footer-tile a:hover {
+    text-decoration: underline;
+}
+
+/* ==================== CHART GRID LAYOUT ==================== */
+/**
+ * Chart grid layout
+ * 2x2 grid on desktop, 1 column on mobile
+ */
+/* Main grid container */
+.charts-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2x2 grid on desktop */
+    gap: 1.5rem;
+    flex: 1;
+}
+
+/**
+ * Individual chart tiles
+ * Each chart is contained in a tile with consistent styling
+ */
+/* Individual chart tiles */
+.chart-tile {
+    display: flex;
+    flex-direction: column;
+    height: 300px; /* Fixed height for all tiles */
+    overflow: hidden;
+}
+
+/* Chart tile heading */
+.chart-tile h2 {
+    color: var(--blauw);
+    font-size: 1.2rem;
+    margin: 0 0 0.5rem 0;
+}
+
+/**
+ * Chart container styling
+ * Ensures charts fill available space within their containers
+ */
+/* Chart container within tiles */
+.chart-container {
+    flex: 1;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* Ensure charts fill their containers */
+.chart-container canvas {
+    width: 100% !important;
+    height: 100% !important;
+    max-height: 100% !important;
+    object-fit: contain;
+}
+
+/**
+ * Chart description styling
+ * Text below the chart title explaining the visualization
+ */
+/* Chart description */
+.chart-description {
+    color: #39394D;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    max-width: 100%;
+    height: auto;
+    overflow: visible;
+}
+
+/* ==================== MAP STYLING ==================== */
+/**
+ * Map container and Leaflet styling
+ * Ensures the map displays correctly within its container
+ */
+#mapContainer {
+    height: 100%;
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Consistent font for map elements */
+.leaflet-container {
+    font-family: Arial, sans-serif;
 }
 
 /* ==================== INTERACTIVE ELEMENTS ==================== */
+/**
+ * Button styling
+ * Consistent styling for all buttons with hover/active states
+ */
 /* Button styling */
 button {
     background-color: var(--wit);
@@ -145,18 +300,21 @@ button {
     margin-bottom: 0.5rem;
 }
 
+/* Button hover state */
 button:hover {
-    background-color: #4D79B3; /* Lichtere tint van blauw */
+    background-color: #4D79B3; /* Lighter blue */
     color: var(--wit);
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* Button active/pressed state */
 button:active {
     transform: translateY(0);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+/* Active button state (selected) */
 button.active {
     background-color: var(--blauw);
     color: var(--wit);
@@ -164,12 +322,17 @@ button.active {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Special buttons */
+/**
+ * Special button variants
+ * Modified button styles for specific use cases
+ */
+/* Dark mode toggle button */
 .dark-mode-button {
     width: auto !important;
     margin-bottom: 0 !important;
 }
 
+/* GitHub link button */
 .github-button {
     color: var(--blauw);
     font-size: 1.5rem;
@@ -182,316 +345,11 @@ button.active {
     text-decoration: none;
 }
 
-/* Collapse button */
-.collapse-button {
-    position: sticky !important;
-    bottom: 0 !important;
-    width: 100% !important;
-    height: 40px !important;
-    border-radius: 0 !important;
-    padding: 0 !important;
-    display: flex !important;
-    align-items: center;
-    justify-content: center;
-    z-index: 10;
-    background-color: var(--blauw) !important;
-    color: var(--wit) !important;
-    border: none !important;
-    border-top: 2px solid var(--wit) !important;
-    margin: 0 !important;
-    opacity: 0.9;
-    transition: opacity 0.2s ease;
-}
-
-.collapse-button:hover {
-    opacity: 1;
-    transform: none !important; /* Override default button hover */
-    box-shadow: none !important; /* Override default button hover */
-}
-
-.collapse-icon, .expand-icon {
-    font-size: 14px;
-}
-
-.expand-icon {
-    display: none;
-}
-
-.container-left.collapsed .collapse-icon {
-    display: none;
-}
-
-.container-left.collapsed .expand-icon {
-    display: inline;
-}
-
-/* Year selector */
-.year-selector {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 15px;
-}
-
-.current-year-display {
-    font-size: 1.2rem;
-    font-weight: bold;
-    min-width: 60px;
-    text-align: center;
-    color: var(--blauw);
-}
-
-.arrow-button {
-    width: auto !important;
-    padding: 5px 10px !important;
-    font-size: 0.9rem !important;
-    border-radius: 50% !important;
-    margin-bottom: 0 !important;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 30px;
-    width: 30px !important;
-}
-
-/* Chart description */
-.chart-description {
-    color: #39394D;
-    font-size: 0.9rem;
-    line-height: 1.4;
-    margin-top: 0.5rem;
-    margin-bottom: 1.5rem;
-}
-
-/* ==================== MAP STYLING ==================== */
-#mapContainer {
-    height: 100%;
-    width: 100%;
-    border-radius: 8px;
-    overflow: hidden;
-}
-
-.leaflet-container {
-    font-family: Arial, sans-serif;
-}
-
-/* ==================== DARK MODE ==================== */
-.dark-mode {
-    background-color: #1a1a1a;
-    color: #ffffff;
-}
-
-.dark-mode .header {
-    background-color: #2d2d2d;
-    border-bottom: 1px solid #404040;
-}
-
-.dark-mode .header a {
-    color: #ffffff;
-}
-
-.dark-mode .container-left {
-    background-color: #2d2d2d;
-}
-
-.dark-mode .container-right {
-    background-color: #1a1a1a;
-}
-
-.dark-mode .container-footer {
-    background-color: #2d2d2d;
-    color: #ffffff;
-}
-
-.dark-mode .container-footer a {
-    color: var(--geel);
-}
-
-.dark-mode button {
-    background-color: #2d2d2d;
-    color: var(--wit);
-    border-color: var(--blauw);
-}
-
-.dark-mode button:hover {
-    background-color: #4D79B3;
-    color: var(--wit);
-}
-
-.dark-mode button.active {
-    background-color: var(--blauw);
-    color: var(--wit);
-}
-
-.dark-mode .github-button {
-    color: var(--blauw);
-}
-
-.dark-mode #chartTitle {
-    color: #ffffff;
-}
-
-.dark-mode .chart-description {
-    color: #cccccc;
-}
-
-.dark-mode .current-year-display {
-    color: var(--wit);
-}
-
-/* Dark mode map popup styles */
-.dark-mode .leaflet-popup-content-wrapper {
-    background-color: #2d2d2d;
-    color: #ffffff;
-}
-
-.dark-mode .leaflet-popup-tip {
-    background-color: #2d2d2d;
-}
-
-/* ==================== RESPONSIVE STYLES ==================== */
-@media screen and (max-width: 768px) {
-    .header {
-        flex-direction: column;
-        gap: 1rem;
-        text-align: center;
-    }
-
-    .header-buttons {
-        width: 100%;
-        justify-content: center;
-    }
-
-    .container-main {
-        flex-direction: column;
-        min-height: 100vh;
-    }
-
-    .container-left {
-        width: 100%;
-        height: auto;
-    }
-
-    .container-right {
-        width: 100%;
-        height: 650px; /* Increased height for mobile */
-    }
-
-    .container-graphs {
-        height: 100%;
-        width: 100%;
-        padding: 0;
-        margin: 0;
-        position: relative;
-    }
-
-    .container-content {
-        display: block !important;
-        padding: 1rem;
-    }
-
-    .collapse-button {
-        display: none !important;
-    }
-
-    /* Better touch targets for mobile */
-    button {
-        padding: 12px 20px;
-        margin-bottom: 0.75rem;
-    }
-
-    /* Adjusted footer for mobile */
-    .container-footer {
-        padding: 15px;
-        margin-top: auto;
-    }
-
-    .container-footer p {
-        font-size: 0.9rem;
-        max-width: 100%;
-        padding: 0 10px;
-        box-sizing: border-box;
-    }
-}
-
-/* Adjust description text color in dark mode */
-.dark-mode .chart-description {
-    color: #ccc;
-}
-
-/* Dark mode styles */
-.dark-mode {
-    background-color: #1a1a1a;
-    color: #ffffff;
-}
-
-.dark-mode .header {
-    background-color: #2d2d2d;
-    border-bottom: 1px solid #404040;
-}
-
-.dark-mode .header a {
-    color: #ffffff;
-}
-
-.dark-mode .container-left {
-    background-color: #2d2d2d;
-}
-
-.dark-mode .container-right {
-    background-color: #1a1a1a;
-}
-
-.dark-mode .container-footer {
-    background-color: #2d2d2d;
-    color: #ffffff;
-}
-
-.dark-mode .container-footer a {
-    color: var(--geel);
-}
-
-.dark-mode button {
-    background-color: #2d2d2d;
-    color: var(--wit);
-    border-color: var(--blauw);
-}
-
-.dark-mode button:hover {
-    background-color: #4D79B3;
-    color: var(--wit);
-}
-
-.dark-mode button.active {
-    background-color: var(--blauw);
-    color: var(--wit);
-}
-
-.dark-mode .github-button {
-    color: var(--blauw);
-}
-
-.dark-mode #chartTitle {
-    color: #ffffff;
-}
-
-.dark-mode .chart-description {
-    color: #cccccc;
-}
-
 /* ==================== SELECTOR STYLING ==================== */
-.selector-container {
-    margin-bottom: 1rem;
-}
-
-.selector-container label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: bold;
-    color: var(--blauw);
-}
-
+/**
+ * Dropdown selector styling
+ * Custom styling for select elements (year selector)
+ */
 .styled-select {
     appearance: none;
     background-color: var(--wit);
@@ -508,22 +366,122 @@ button.active {
     background-size: 1em;
 }
 
+/* Hover state for select dropdown */
 .styled-select:hover {
     border-color: var(--blauw);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* Focus state for select dropdown */
 .styled-select:focus {
     outline: none;
     border-color: var(--blauw);
     box-shadow: 0 0 0 3px rgba(0, 48, 145, 0.25);
 }
 
-/* Dark mode styles for selectors */
-.dark-mode .selector-container label {
+/* ==================== ACCENT STYLING ==================== */
+/**
+ * Accent border classes
+ * Provides yellow accents to selected elements to draw attention
+ */
+/* Accent styles for tiles */
+.accent-left {
+    border-left: 3px solid var(--geel);
+}
+
+.accent-top {
+    border-top: 3px solid var(--geel);
+}
+
+.accent-bottom {
+    border-bottom: 3px solid var(--geel);
+}
+
+/* ==================== DARK MODE ==================== */
+/**
+ * Dark mode styles
+ * Alternative color scheme for night viewing
+ */
+.dark-mode {
+    background-color: #1a1a1a;
+    color: #ffffff;
+}
+
+/* Dark background for all tiles */
+.dark-mode .header-tile,
+.dark-mode .dashboard-info-tile,
+.dark-mode .year-selector-tile,
+.dark-mode .chart-tile,
+.dark-mode .footer-tile {
+    background: #2d2d2d;
+}
+
+/* Light text for headings in dark mode */
+.dark-mode .site-title,
+.dark-mode .dashboard-info-tile h1,
+.dark-mode .chart-tile h2 {
     color: var(--wit);
 }
 
+/* Light gray text for descriptions in dark mode */
+.dark-mode .dashboard-description,
+.dark-mode .chart-description {
+    color: #cccccc;
+}
+
+/* Yellow links in dark mode footer */
+.dark-mode .footer-tile a {
+    color: var(--geel);
+}
+
+/* Dark mode button styling */
+.dark-mode button {
+    background-color: #2d2d2d;
+    color: var(--wit);
+    border-color: var(--blauw);
+}
+
+/* Dark mode button hover state */
+.dark-mode button:hover {
+    background-color: #4D79B3;
+    color: var(--wit);
+}
+
+/* Dark mode active button state */
+.dark-mode button.active {
+    background-color: var(--blauw);
+    color: var(--wit);
+}
+
+/* GitHub icon in dark mode */
+.dark-mode .github-button {
+    color: var(--blauw);
+}
+
+/* Year selector label in dark mode */
+.dark-mode .year-selector-tile label {
+    color: var(--wit);
+}
+
+/**
+ * Dark mode map styling
+ * Ensures map elements are visible in dark mode
+ */
+/* Dark mode map popup styles */
+.dark-mode .leaflet-popup-content-wrapper {
+    background-color: #2d2d2d;
+    color: #ffffff;
+}
+
+.dark-mode .leaflet-popup-tip {
+    background-color: #2d2d2d;
+}
+
+/**
+ * Dark mode select styling
+ * Custom styling for select dropdowns in dark mode
+ */
+/* Dark mode styles for selectors */
 .dark-mode .styled-select {
     background-color: #2d2d2d;
     color: var(--wit);
@@ -535,13 +493,64 @@ button.active {
     box-shadow: 0 0 0 3px rgba(0, 48, 145, 0.5);
 }
 
-/* Mobile responsive styles for selectors */
+/* ==================== RESPONSIVE STYLES ==================== */
+/**
+ * Responsive adaptations
+ * Adjusts layout and sizing for smaller screens (tablets and mobile)
+ */
 @media screen and (max-width: 768px) {
-    .selector-container {
-        margin-bottom: 1.25rem;
+    /* Tighter padding on small screens */
+    .container-main {
+        padding: 0.75rem;
     }
     
-    .styled-select {
-        padding: 12px 35px 12px 15px;
+    /* Smaller padding for all tiles */
+    .header-tile, .dashboard-info-tile, .year-selector-tile, .chart-tile, .footer-tile {
+        padding: 1rem;
+    }
+    
+    /* Stack header elements vertically */
+    .header-tile {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+    /* Full width controls */
+    .controls-container {
+        width: 100%;
+        justify-content: flex-start;
+    }
+    
+    /* Stack info and year selector */
+    .info-year-row {
+        grid-template-columns: 1fr; /* Stack vertically on mobile */
+        gap: 1rem;
+    }
+
+    /* Smaller title on mobile */
+    .dashboard-info-tile h1 {
+        font-size: 1.5rem;
+    }
+
+    /* Single column layout for charts */
+    .charts-grid {
+        grid-template-columns: 1fr; /* Single column on mobile */
+        gap: 1rem;
+    }
+
+    /* Smaller chart heights on mobile */
+    .chart-tile {
+        height: 250px; /* Smaller on mobile */
+    }
+    
+    /* Larger touch targets for mobile */
+    button, .styled-select {
+        padding: 12px 20px;
+    }
+
+    /* Smaller footer text */
+    .footer-tile p {
+        font-size: 0.9rem;
     }
 }

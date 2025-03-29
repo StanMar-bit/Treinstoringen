@@ -24,74 +24,97 @@
 </head>
 
 <body>
-    <header class="header">
-        <a href="/">treinstoringen.com</a>
-        <div class="header-buttons">
-            <button id="darkModeButton" class="dark-mode-button">🌙 Dark Mode</button>
-            <a href="https://github.com/StanMar-bit/Treinstoringen" target="_blank" class="github-button">
-                <i class="fab fa-github"></i>
-            </a>
-        </div>
-    </header>
-    <!-- Container met UI en charts-->
+    <!-- Main container -->
     <div class="container-main">
-        <!-- CONTAINER LEFT -->
-        <div class="container-left">
-            <div class="container-content">
-                <div class="container-information">
-                    <h1 id="chartTitle">My graph</h1>
-                    <p id="chartDescription" class="chart-description">This is a description of the graph</p>
+        <div class="dashboard-container">
+            <!-- Header tile -->
+            <div class="header-tile accent-top">
+                <div class="site-branding">
+                    <img src="favicon.ico" alt="Logo" class="site-logo">
+                    <a href="/" class="site-title">treinstoringen.com</a>
                 </div>
-                <div class="container-ui">
-                    <div class="selector-container">
-                        <label for="chartSelector">Grafiek type:</label>
-                        <select id="chartSelector" class="styled-select">
-                            <option value="monthly">Treinstoringen per maand</option>
-                            <option value="causes">Oorzaak treinstoringen</option>
-                            <option value="map">Storingen op het spoor</option>
-                            <option value="causesPerMonth">Oorzaken per maand</option>
-                        </select>
+                <div class="controls-container">
+                    <button id="darkModeButton" class="dark-mode-button">🌙 Dark Mode</button>
+                    <a href="https://github.com/StanMar-bit/Treinstoringen" target="_blank" class="github-button">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Info and Year selector row -->
+            <div class="info-year-row">
+                <!-- Dashboard information tile -->
+                <div class="dashboard-info-tile accent-left">
+                    <h1>Treinstoringen Dashboard</h1>
+                    <p class="dashboard-description">Een overzicht van treinstoringen in Nederland</p>
+                </div>
+                
+                <!-- Year selector tile -->
+                <div class="year-selector-tile">
+                    <label for="yearSelector">Gegevens voor jaar:</label>
+                    <select id="yearSelector" class="styled-select">
+                        <option value="2024">2024</option>
+                        <option value="2023">2023</option>
+                        <option value="2022">2022</option>
+                        <option value="2021">2021</option>
+                        <option value="2020">2020</option>
+                        <option value="2019">2019</option>
+                        <option value="2018">2018</option>
+                        <option value="2017">2017</option>
+                        <option value="2016">2016</option>
+                        <option value="2015">2015</option>
+                        <option value="2014">2014</option>
+                        <option value="2013">2013</option>
+                        <option value="2012">2012</option>
+                        <option value="2011">2011</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Grid container for all charts -->
+            <div class="charts-grid">
+                <!-- Monthly Disruptions Chart -->
+                <div class="chart-tile accent-left">
+                    <h2>Treinstoringen per maand</h2>
+                    <p class="chart-description">Overzicht van het aantal treinstoringen per maand.</p>
+                    <div class="chart-container">
+                        <canvas id="monthlyChart"></canvas>
                     </div>
-                    
-                    <div class="selector-container">
-                        <label for="yearSelector">Jaar:</label>
-                        <select id="yearSelector" class="styled-select">
-                            <option value="2024">2024</option>
-                            <option value="2023">2023</option>
-                            <option value="2022">2022</option>
-                            <option value="2021">2021</option>
-                            <option value="2020">2020</option>
-                            <option value="2019">2019</option>
-                            <option value="2018">2018</option>
-                            <option value="2017">2017</option>
-                            <option value="2016">2016</option>
-                            <option value="2015">2015</option>
-                            <option value="2014">2014</option>
-                            <option value="2013">2013</option>
-                            <option value="2012">2012</option>
-                            <option value="2011">2011</option>
-                        </select>
+                </div>
+                
+                <!-- Causes Pie Chart -->
+                <div class="chart-tile">
+                    <h2>Oorzaak treinstoringen</h2>
+                    <p class="chart-description">Verdeling van de verschillende categorieën oorzaken van treinstoringen.</p>
+                    <div class="chart-container">
+                        <canvas id="causesChart"></canvas>
+                    </div>
+                </div>
+                
+                <!-- Railway Map -->
+                <div class="chart-tile accent-left">
+                    <h2>Storingen op het spoor</h2>
+                    <p class="chart-description">Geografische weergave van storingen op het Nederlandse spoornetwerk. Hoe roder de lijn, hoe meer storingen.</p>
+                    <div class="chart-container" id="mapContainer"></div>
+                </div>
+                
+                <!-- Causes per Month Chart -->
+                <div class="chart-tile">
+                    <h2>Oorzaken per maand</h2>
+                    <p class="chart-description">Trend van verschillende oorzaken van treinstoringen gedurende het jaar.</p>
+                    <div class="chart-container">
+                        <canvas id="causesPerMonthChart"></canvas>
                     </div>
                 </div>
             </div>
-            <button id="collapseButton" class="collapse-button">
-                <span class="collapse-icon">◀</span>
-                <span class="expand-icon">▶</span>
-            </button>
-        </div>
-        <!-- CONTAINER RIGHT-->
-        <div class="container-right">
-            <div class="container-graphs">
-                <canvas id="myChart"></canvas>
+            
+            <!-- FOOTER -->
+            <div class="footer-tile accent-bottom">
+                <p>Bron: <a href="https://www.rijdendetreinen.nl/open-data/treinstoringen" target="_blank">
+                    Rijden de Treinen</a> - Creative Commons Attribution 4.0-licentie</p>
             </div>
         </div>
     </div>
-
-    <!-- FOOTER -->
-    <footer class="container-footer">
-        <p>Bron: <a href="https://www.rijdendetreinen.nl/open-data/treinstoringen" target="_blank">
-            Rijden de Treinen</a> - Creative Commons Attribution 4.0-licentie</p>
-    </footer>
 </body>
 <!-- link to the custom JS -->
 <script src="script.js"></script>
