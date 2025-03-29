@@ -483,12 +483,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
             // Dutch month names for x-axis
             const monthNames = {
-                '01': 'Januari', '02': 'Februari', '03': 'Maart', '04': 'April',
-                '05': 'Mei', '06': 'Juni', '07': 'Juli', '08': 'Augustus',
-                '09': 'September', '10': 'Oktober', '11': 'November', '12': 'December'
+                '01': 'Jan', '02': 'Feb', '03': 'Mrt', '04': 'Apr',
+                '05': 'Mei', '06': 'Jun', '07': 'Jul', '08': 'Aug',
+                '09': 'Sep', '10': 'Okt', '11': 'Nov', '12': 'Dec'
             };
 
-            // Prepare all months of the year in order
+            // Prepare all months of the year in order with abbreviated names for mobile
             const allMonths = Object.values(monthNames);
             
             // Group by cause and month - create matrix of cause x month
@@ -514,7 +514,17 @@ document.addEventListener("DOMContentLoaded", function() {
                 causesPerMonth[translatedCause][monthName] = (causesPerMonth[translatedCause][monthName] || 0) + 1;
             });
 
+            // Get causes sorted by total disruptions to identify top causes
+            const causeSums = {};
+            for (const cause in causesPerMonth) {
+                causeSums[cause] = Object.values(causesPerMonth[cause]).reduce((sum, count) => sum + count, 0);
+            }
+            
+            // Sort causes by total disruptions
+            const sortedCauses = Object.keys(causeSums).sort((a, b) => causeSums[b] - causeSums[a]);
+            
             // Create datasets for the chart - one line per cause
+            // Limit to 5 most common causes for better readability on mobile
             const datasets = [];
             const colors = [
                 '#003082', '#FFC917', '#E6E6E9', '#4D79B3', 
@@ -522,9 +532,13 @@ document.addEventListener("DOMContentLoaded", function() {
                 '#5D8AA8', '#A52A2A'
             ];
 
-            // Create dataset for each cause
+            // Create dataset for top causes only - improves mobile readability
             let colorIndex = 0;
-            for (const cause in causesPerMonth) {
+            const isMobile = window.innerWidth < 768;
+            const displayLimit = isMobile ? 5 : 8; // Show fewer on mobile
+            
+            for (let i = 0; i < Math.min(displayLimit, sortedCauses.length); i++) {
+                const cause = sortedCauses[i];
                 const values = allMonths.map(month => causesPerMonth[cause][month]);
                 
                 datasets.push({
@@ -548,7 +562,43 @@ document.addEventListener("DOMContentLoaded", function() {
             // Configure chart options
             charts.causesPerMonth.options.scales.y.display = true;
             charts.causesPerMonth.options.scales.x.display = true;
+            
+            // Mobile optimizations for x-axis
+            if (isMobile) {
+                charts.causesPerMonth.options.scales.x.ticks = {
+                    maxRotation: 0,  // No rotation on mobile
+                    minRotation: 0,  // No rotation on mobile
+                    autoSkip: false,
+                    font: {
+                        size: 9  // Smaller font size
+                    },
+                    color: isDarkMode ? '#ffffff' : '#39394D'
+                };
+            } else {
+                charts.causesPerMonth.options.scales.x.ticks = {
+                    maxRotation: 45,
+                    minRotation: 45,
+                    autoSkip: false,
+                    color: isDarkMode ? '#ffffff' : '#39394D'
+                };
+            }
+            
             charts.causesPerMonth.options.plugins.legend.display = true;
+            
+            // Mobile optimized legends
+            if (isMobile) {
+                charts.causesPerMonth.options.plugins.legend.position = 'bottom';
+                charts.causesPerMonth.options.plugins.legend.labels.boxWidth = 10;
+                charts.causesPerMonth.options.plugins.legend.labels.font = {
+                    size: 10
+                };
+            } else {
+                charts.causesPerMonth.options.plugins.legend.position = 'top';
+                charts.causesPerMonth.options.plugins.legend.labels.boxWidth = 15;
+                charts.causesPerMonth.options.plugins.legend.labels.font = {
+                    size: 11
+                };
+            }
             
             charts.causesPerMonth.update();
 
@@ -762,6 +812,16 @@ document.addEventListener("DOMContentLoaded", function() {
     
     // Dark mode toggle button - switch between light/dark themes
     darkModeButton.addEventListener('click', toggleDarkMode);
+
+    // Window resize event to optimize charts for current screen size
+    window.addEventListener('resize', function() {
+        // Debounce resize events to prevent excessive updates
+        clearTimeout(this.resizeTimer);
+        this.resizeTimer = setTimeout(function() {
+            // Update the causes per month chart for mobile optimizations
+            loadCausesPerMonth();
+        }, 250);
+    });
 
     // ============= INITIALIZATION =============
     /**

@@ -219,6 +219,11 @@ html, body {
     overflow: hidden;
 }
 
+/* Causes per month chart needs more height to display properly */
+.chart-tile:nth-of-type(4) {
+    height: 350px; /* Taller than other charts for better visibility */
+}
+
 /* Chart tile heading */
 .chart-tile h2 {
     color: var(--blauw);
@@ -237,6 +242,7 @@ html, body {
     width: 100%;
     height: 100%;
     overflow: hidden;
+    min-height: 200px; /* Ensure minimum height for all chart containers */
 }
 
 /* Ensure charts fill their containers */
@@ -498,6 +504,20 @@ button.active {
  * Responsive adaptations
  * Adjusts layout and sizing for smaller screens (tablets and mobile)
  */
+
+/* Medium size screens (tablets) */
+@media screen and (max-width: 1024px) {
+    .chart-tile {
+        height: 330px; /* Slightly taller on tablets */
+    }
+    
+    /* Causes per month chart needs more height */
+    .chart-tile:nth-of-type(4) {
+        height: 380px;
+    }
+}
+
+/* Small screens (mobile) */
 @media screen and (max-width: 768px) {
     /* Tighter padding on small screens */
     .container-main {
@@ -544,6 +564,20 @@ button.active {
         height: 250px; /* Smaller on mobile */
     }
     
+    .chart-tile h2 {
+        font-size: 1.1rem; /* Slightly smaller headings */
+    }
+    
+    .chart-description {
+        font-size: 0.8rem; /* Smaller description text */
+        margin-bottom: 0.7rem; /* Less space below description */
+    }
+    
+    /* Causes per month chart needs extra height on mobile */
+    .chart-tile:nth-of-type(4) {
+        height: 400px; /* Much taller on mobile to show multiple lines clearly */
+    }
+    
     /* Larger touch targets for mobile */
     button, .styled-select {
         padding: 12px 20px;
@@ -552,5 +586,17 @@ button.active {
     /* Smaller footer text */
     .footer-tile p {
         font-size: 0.9rem;
+    }
+}
+
+/* Extra small screens */
+@media screen and (max-width: 480px) {
+    .chart-tile {
+        height: 270px; /* Slightly taller on very small screens */
+    }
+    
+    /* Causes per month chart needs even more height on very small screens */
+    .chart-tile:nth-of-type(4) {
+        height: 420px;
     }
 }
