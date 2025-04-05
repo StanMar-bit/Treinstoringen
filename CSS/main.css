@@ -197,14 +197,20 @@ html, body {
 /* ==================== CHART GRID LAYOUT ==================== */
 /**
  * Chart grid layout
- * 2x2 grid on desktop, 1 column on mobile
+ * 2x2 grid on desktop, 1 column on mobile, with a fifth chart taking up 2 columns
  */
 /* Main grid container */
 .charts-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 2x2 grid on desktop */
+    grid-template-columns: repeat(2, 1fr); /* 2 columns on desktop */
     gap: 1.5rem;
     flex: 1;
+}
+
+/* The fifth chart (duration) spans both columns and has extra height for all labels */
+.chart-tile:nth-of-type(5) {
+    grid-column: 1 / span 2; /* Span across both columns */
+    height: 400px; /* Extra height for all labels */
 }
 
 /**
@@ -222,6 +228,16 @@ html, body {
 /* Causes per month chart needs more height to display properly */
 .chart-tile:nth-of-type(4) {
     height: 350px; /* Taller than other charts for better visibility */
+}
+
+/* Railway map tile should have the same height as causes per month */
+.chart-tile:nth-of-type(3) {
+    height: 350px; /* Match height of causes per month chart */
+}
+
+/* Duration chart needs more height for horizontal bars */
+.chart-tile:nth-of-type(5) {
+    height: 350px; /* Taller for horizontal bar chart */
 }
 
 /* Chart tile heading */
@@ -515,6 +531,16 @@ button.active {
     .chart-tile:nth-of-type(4) {
         height: 380px;
     }
+    
+    /* Railway map should match causes per month height */
+    .chart-tile:nth-of-type(3) {
+        height: 380px;
+    }
+    
+    /* Duration chart needs more height for all labels */
+    .chart-tile:nth-of-type(5) {
+        height: 450px; /* Extra height on tablets */
+    }
 }
 
 /* Small screens (mobile) */
@@ -578,6 +604,17 @@ button.active {
         height: 400px; /* Much taller on mobile to show multiple lines clearly */
     }
     
+    /* Railway map should match causes per month height */
+    .chart-tile:nth-of-type(3) {
+        height: 400px; /* Match height of causes per month chart */
+    }
+    
+    /* Duration chart needs extra height on mobile */
+    .chart-tile:nth-of-type(5) {
+        height: 450px; /* More height on mobile for better readability */
+        grid-column: auto; /* Reset to default on mobile */
+    }
+    
     /* Larger touch targets for mobile */
     button, .styled-select {
         padding: 12px 20px;
@@ -598,5 +635,15 @@ button.active {
     /* Causes per month chart needs even more height on very small screens */
     .chart-tile:nth-of-type(4) {
         height: 420px;
+    }
+    
+    /* Railway map should match causes per month height */
+    .chart-tile:nth-of-type(3) {
+        height: 420px;
+    }
+    
+    /* Duration chart needs more height on very small screens */
+    .chart-tile:nth-of-type(5) {
+        height: 480px; /* Even more height on very small screens */
     }
 }

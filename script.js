@@ -20,6 +20,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const monthlyChart = document.getElementById('monthlyChart');
     const causesChart = document.getElementById('causesChart');
     const causesPerMonthChart = document.getElementById('causesPerMonthChart');
+    const durationChart = document.getElementById('durationChart');
     const mapContainer = document.getElementById('mapContainer');
     const yearSelector = document.getElementById('yearSelector');
     const darkModeButton = document.getElementById('darkModeButton');
@@ -156,6 +157,31 @@ document.addEventListener("DOMContentLoaded", function() {
                 datasets: []
             },
             options: getDefaultChartOptions()
+        }),
+        
+        // Disruption duration chart - showing average duration by cause
+        duration: new Chart(durationChart, {
+            type: 'bar',
+            data: {
+                labels: [],
+                datasets: [{
+                    label: 'Gemiddelde duur (minuten)',
+                    data: [],
+                    borderWidth: 1,
+                    backgroundColor: blauwColor,
+                    borderColor: blauwColor
+                }]
+            },
+            options: {
+                ...getDefaultChartOptions(),
+                indexAxis: 'y', // Horizontal bar chart
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        align: 'center'
+                    }
+                }
+            }
         })
     };
 
@@ -206,6 +232,7 @@ document.addEventListener("DOMContentLoaded", function() {
         loadMonthlyDisruptions();
         loadDisruptionCauses();
         loadCausesPerMonth();
+        loadDisruptionDurations();
         loadRailwayMap();
     }
 
@@ -608,6 +635,115 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     /**
+     * Loads disruption duration data and updates horizontal bar chart
+     * Shows average duration of disruptions by cause in minutes
+     */
+    async function loadDisruptionDurations() {
+        try {
+            const response = await fetch(`./Data/disruptions-${currentYear}.json`);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const data = await response.json();
+
+            // Translations for cause groups - English to Dutch
+            const causeTranslations = {
+                'staff': 'Personeel',
+                'external': 'Externe factoren',
+                'infrastructure': 'Infrastructuur',
+                'rolling stock': 'Materieel',
+                'weather': 'Weer',
+                'accidents': 'Ongelukken',
+                'logistical': 'Logistiek',
+                'engineering work': 'Technisch werk',
+                'unknown': 'Onbekend'
+            };
+
+            // Group by cause and calculate average duration
+            const causeDurations = {};
+            const causeCounts = {};
+            
+            data.forEach(item => {
+                // Skip items without duration
+                if (!item.duration_minutes) return;
+                
+                const cause = item.cause_group || "unknown";
+                const translatedCause = causeTranslations[cause] || cause;
+                
+                // Sum durations and count occurrences for averaging
+                causeDurations[translatedCause] = (causeDurations[translatedCause] || 0) + item.duration_minutes;
+                causeCounts[translatedCause] = (causeCounts[translatedCause] || 0) + 1;
+            });
+
+            // Calculate averages and prepare data
+            const causes = [];
+            const durations = [];
+            
+            for (const cause in causeDurations) {
+                // Calculate average duration
+                const avgDuration = Math.round(causeDurations[cause] / causeCounts[cause]);
+                
+                causes.push(cause);
+                durations.push(avgDuration);
+            }
+
+            // Sort data by duration (descending)
+            const sortedIndices = durations.map((_, i) => i).sort((a, b) => durations[b] - durations[a]);
+            const sortedCauses = sortedIndices.map(i => causes[i]);
+            const sortedDurations = sortedIndices.map(i => durations[i]);
+
+            // Update chart with new data
+            charts.duration.config.type = 'bar';
+            charts.duration.data.labels = sortedCauses;
+            charts.duration.data.datasets = [{
+                label: 'Gemiddelde duur (minuten)',
+                data: sortedDurations,
+                borderWidth: 1,
+                backgroundColor: blauwColor,
+                borderColor: blauwColor
+            }];
+
+            // Configure additional settings
+            charts.duration.options.indexAxis = 'y'; // Horizontal bar chart
+            
+            // Ensure all labels are displayed by adjusting ticks
+            charts.duration.options.scales.y.ticks = {
+                color: isDarkMode ? '#ffffff' : '#39394D',
+                autoSkip: false, // Prevent automatic skipping of labels
+                callback: function(value, index, values) {
+                    return sortedCauses[index]; // Return the full label
+                }
+            };
+            
+            // Ensure there's enough space for each bar and label
+            const barCount = sortedCauses.length;
+            const minBarHeight = 30; // Minimum pixels per bar+label
+            const totalMinHeight = barCount * minBarHeight;
+            
+            // Apply padding based on number of causes
+            charts.duration.options.layout.padding = {
+                left: 10,
+                right: 10,
+                top: 20,
+                bottom: 10 + (barCount * 2) // Additional padding based on number of bars
+            };
+            
+            // Mobile-friendly adjustments
+            const isMobile = window.innerWidth < 768;
+            if (isMobile) {
+                charts.duration.options.scales.y.ticks.font = {
+                    size: 10  // Smaller font for mobile
+                };
+            }
+            
+            charts.duration.update();
+
+        } catch (error) {
+            handleChartError(error);
+        }
+    }
+
+    /**
      * Loads railway map showing disruptions
      * Displays geographical visualization of railway disruptions on a map
      */
@@ -705,86 +841,26 @@ document.addEventListener("DOMContentLoaded", function() {
             } catch (error) {
                 console.error("Fout bij laden van kaartdata:", error);
                 
-                // Create sample data for demo purposes if file is not found
-                const demoTracks = [
-                    {
-                        name: "Amsterdam - Utrecht",
-                        disruptions: 25,
-                        coords: [[52.3791, 4.9003], [52.2569, 4.9925], [52.0894, 5.1142]]
-                    },
-                    {
-                        name: "Rotterdam - Den Haag",
-                        disruptions: 15,
-                        coords: [[51.9244, 4.4777], [52.0705, 4.3007]]
-                    },
-                    {
-                        name: "Eindhoven - Tilburg",
-                        disruptions: 5,
-                        coords: [[51.4426, 5.4777], [51.5605, 5.0836]]
-                    }
-                ];
-                
-                // Initialize map with demo data if needed
-                if (!map) {
-                    map = L.map('mapContainer').setView([52.1326, 5.2913], 7);
+                // Create error message in map container
+                if (mapContainer) {
+                    const errorMessage = document.createElement('div');
+                    errorMessage.className = 'map-error-message';
+                    errorMessage.innerHTML = `
+                        <p>Kaartdata kon niet worden geladen.</p>
+                    `;
+                    mapContainer.innerHTML = '';
+                    mapContainer.appendChild(errorMessage);
                     
-                    // Add tile layer based on current theme
-                    const tileLayer = isDarkMode ? 
-                        'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png' :
-                        'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-                    
-                    L.tileLayer(tileLayer, {
-                        maxZoom: 19,
-                        attribution: '© OpenStreetMap contributors'
-                    }).addTo(map);
+                    // Style the error message
+                    errorMessage.style.position = 'absolute';
+                    errorMessage.style.top = '50%';
+                    errorMessage.style.left = '50%';
+                    errorMessage.style.transform = 'translate(-50%, -50%)';
+                    errorMessage.style.backgroundColor = 'rgba(255, 255, 255, 0.8)';
+                    errorMessage.style.padding = '10px 15px';
+                    errorMessage.style.borderRadius = '5px';
+                    errorMessage.style.zIndex = '1000';
                 }
-                
-                // Clear existing layers except the tile layer
-                map.eachLayer((layer) => {
-                    if (!(layer instanceof L.TileLayer)) {
-                        map.removeLayer(layer);
-                    }
-                });
-
-                // Add demo tracks to map
-                demoTracks.forEach(track => {
-                    // Calculate color based on disruption count
-                    const color = track.disruptions > 20 ? '#b10026' :    // Highest
-                                track.disruptions > 10 ? '#fc4e2a' :      // High
-                                track.disruptions > 5 ? '#feb24c' :       // Medium
-                                '#ffeda0';                              // Low
-
-                    // Add track to map
-                    L.polyline(track.coords, {
-                        color: color,
-                        weight: 3,
-                        opacity: 0.8
-                    })
-                    .bindPopup(`<b>${track.name}</b><br>Aantal storingen: ${track.disruptions}`)
-                    .addTo(map);
-                });
-                
-                // Add message to indicate demo data is being used
-                const errorMessage = document.createElement('div');
-                errorMessage.className = 'map-error-message';
-                errorMessage.innerHTML = `
-                    <p>Kaartdata kon niet worden geladen. Tonen van voorbeeldgegevens...</p>
-                `;
-                mapContainer.appendChild(errorMessage);
-                
-                // Make sure the message is positioned correctly
-                errorMessage.style.position = 'absolute';
-                errorMessage.style.bottom = '10px';
-                errorMessage.style.right = '10px';
-                errorMessage.style.backgroundColor = 'rgba(255, 255, 255, 0.8)';
-                errorMessage.style.padding = '5px 10px';
-                errorMessage.style.borderRadius = '5px';
-                errorMessage.style.zIndex = '1000';
-                
-                // Ensure map renders correctly
-                setTimeout(() => {
-                    map.invalidateSize();
-                }, 100);
             }
 
         } catch (error) {
@@ -820,6 +896,8 @@ document.addEventListener("DOMContentLoaded", function() {
         this.resizeTimer = setTimeout(function() {
             // Update the causes per month chart for mobile optimizations
             loadCausesPerMonth();
+            // Also update the duration chart for mobile optimizations
+            loadDisruptionDurations();
         }, 250);
     });
 
